@@ -1,7 +1,8 @@
 namespace GestionTallerDeMotos.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class CreacionDeTablaTiposDocumento : DbMigration
     {
         public override void Up()
@@ -10,8 +11,8 @@ namespace GestionTallerDeMotos.Migrations
                 "dbo.TiposDocumento",
                 c => new
                     {
-                        Codigo = c.Byte(nullable: false),
-                        Descripcion = c.String(maxLength: 50),
+                        Codigo = c.Byte(nullable: false, identity: true),
+                        Descripcion = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Codigo);
             

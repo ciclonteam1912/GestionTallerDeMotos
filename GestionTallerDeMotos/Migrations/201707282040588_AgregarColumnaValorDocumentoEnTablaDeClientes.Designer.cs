@@ -7,13 +7,13 @@ namespace GestionTallerDeMotos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreacionDeTablaTiposDocumento : IMigrationMetadata
+    public sealed partial class AgregarColumnaValorDocumentoEnTablaDeClientes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreacionDeTablaTiposDocumento));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AgregarColumnaValorDocumentoEnTablaDeClientes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707201654273_CreacionDeTablaTiposDocumento"; }
+            get { return "201707282040588_AgregarColumnaValorDocumentoEnTablaDeClientes"; }
         }
         
         string IMigrationMetadata.Source

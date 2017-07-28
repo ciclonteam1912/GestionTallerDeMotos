@@ -7,13 +7,13 @@ namespace GestionTallerDeMotos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class HacerColumnaDescripcionNotNull : IMigrationMetadata
+    public sealed partial class CreacionDeTablaTiposDocumento : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(HacerColumnaDescripcionNotNull));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreacionDeTablaTiposDocumento));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707201701401_HacerColumnaDescripcionNotNull"; }
+            get { return "201707212259076_CreacionDeTablaTiposDocumento"; }
         }
         
         string IMigrationMetadata.Source

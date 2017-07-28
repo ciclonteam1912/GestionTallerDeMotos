@@ -1,7 +1,8 @@
 namespace GestionTallerDeMotos.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class CreacionDeTablaPersonerias : DbMigration
     {
         public override void Up()
@@ -10,7 +11,7 @@ namespace GestionTallerDeMotos.Migrations
                 "dbo.Personerias",
                 c => new
                     {
-                        Codigo = c.Byte(nullable: false),
+                        Codigo = c.Byte(nullable: false, identity: true),
                         Descripcion = c.String(nullable: false, maxLength: 20),
                     })
                 .PrimaryKey(t => t.Codigo);

@@ -1,4 +1,5 @@
 ﻿using GestionTallerDeMotos.Models.ModelosDeDominio;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace GestionTallerDeMotos.ConfiguracionDeEntidades
@@ -9,7 +10,8 @@ namespace GestionTallerDeMotos.ConfiguracionDeEntidades
         {
 
             Property(p => p.Id)
-            .HasColumnName("Codigo");
+            .HasColumnName("Codigo")
+            .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 
             Property(p => p.Descripcion)

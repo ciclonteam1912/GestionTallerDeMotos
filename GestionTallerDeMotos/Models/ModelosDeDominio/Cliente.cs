@@ -29,5 +29,7 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
         public TipoDocumento TipoDocumento { get; set; }
 
         public byte TipoDocumentoId { get; set; }
+
+        public string ValorDocumento { get; set; }
     }
 }

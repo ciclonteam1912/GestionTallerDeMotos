@@ -7,13 +7,13 @@ namespace GestionTallerDeMotos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreacionDeTablaPersonerias : IMigrationMetadata
+    public sealed partial class CargarDatosEnLasTablasPersoneriasYTiposDocumento : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreacionDeTablaPersonerias));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CargarDatosEnLasTablasPersoneriasYTiposDocumento));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707201642150_CreacionDeTablaPersonerias"; }
+            get { return "201707212308184_CargarDatosEnLasTablasPersoneriasYTiposDocumento"; }
         }
         
         string IMigrationMetadata.Source

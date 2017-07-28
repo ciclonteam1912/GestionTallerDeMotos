@@ -35,6 +35,10 @@ namespace GestionTallerDeMotos.ConfiguracionDeEntidades
 
             Property(c => c.TipoDocumentoId)
             .HasColumnName("TipoDocumentoCodigo");
+
+            Property(c => c.ValorDocumento)
+                .IsRequired()
+                .HasMaxLength(50);
         }
     }
 }
