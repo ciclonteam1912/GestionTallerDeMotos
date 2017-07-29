@@ -3,6 +3,7 @@ using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +21,12 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View("ListaDeClientes");
+            var clientes = _context.Clientes
+                .Include(c => c.TipoDocumento)
+                .Include(c => c.Personeria)
+                .ToList();
+
+            return View("ListaDeClientes", clientes);
         }
 
 

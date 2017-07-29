@@ -1,11 +1,43 @@
-﻿
+﻿@model IEnumerable<GestionTallerDeMotos.Models.ModelosDeDominio.Cliente>
 @{
-    ViewBag.Title = "ListaDeClientes";
+    ViewBag.Title = "Lista De Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ListaDeClientes</h2>
+<h2>Lista De Clientes</h2>
 
 <p>
     @Html.ActionLink("Nuevo Cliente", "NuevoCliente", "Cliente", new { @class = "btn btn-primary"})
 </p>
+
+<table id="clientes" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Tipo de Documento</th>
+            <th>Valor Documento</th>
+            <th>Personería</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Apellido</td>
+                <td>@cliente.TipoDocumento.Descripcion</td>
+                <td>@cliente.ValorDocumento</td>
+                <td>@cliente.Personeria.Descripcion</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#clientes").DataTable();
+        })
+    </script>    
+}
