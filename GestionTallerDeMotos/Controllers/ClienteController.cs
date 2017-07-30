@@ -1,4 +1,5 @@
-﻿using GestionTallerDeMotos.Models;
+﻿using AutoMapper;
+using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
 using System;
@@ -63,11 +64,32 @@ namespace GestionTallerDeMotos.Controllers
                 cliente.FechaDeIngreso = DateTime.Now;
                 _context.Clientes.Add(cliente);
             }
+            else
+            {
+                var clientesBD = _context.Clientes.Single(c => c.Id == cliente.Id);
+                Mapper.Map<Cliente, Cliente>(cliente, clientesBD);
+            }
 
             _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult EditarCliente(int id)
+        {
+            var cliente = _context.Clientes.SingleOrDefault(c => c.Id == id);
+
+            if (cliente == null)
+                return HttpNotFound();
+
+            var viewModel = new ClienteViewModel(cliente)
+            {
+                Personerias = _context.Personerias.ToList(),
+                TiposDocumentos = _context.TiposDocumento.ToList()
+            };
+
+            return View("ClienteFormulario", viewModel);
+        }
     }
 }

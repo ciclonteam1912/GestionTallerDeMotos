@@ -8,6 +8,8 @@ namespace GestionTallerDeMotos.App_Start
     {
         public MappingProfile()
         {
+            Mapper.CreateMap<Cliente, Cliente>()
+                .ForMember(c => c.FechaDeIngreso, opt => opt.Ignore());
             Mapper.CreateMap<Cliente, ClienteDto>();
             Mapper.CreateMap<Personeria, PersoneriaDto>();
             Mapper.CreateMap<TipoDocumento, TipoDocumentoDto>();

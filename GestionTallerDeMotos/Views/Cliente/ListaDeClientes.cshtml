@@ -13,6 +13,7 @@
 <table id="clientes" class="table table-bordered table-hover">
     <thead>
         <tr>
+            <th></th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Tipo de Documento</th>
@@ -32,6 +33,12 @@
                     dataSrc: ""
                 },
                 columns: [
+                    {
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='/Cliente/EditarCliente/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                        }
+                    },
                     {
                         data: "Nombre"
                     },
