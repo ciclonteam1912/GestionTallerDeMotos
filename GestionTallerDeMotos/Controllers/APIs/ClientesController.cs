@@ -1,10 +1,9 @@
-﻿using GestionTallerDeMotos.Models;
-using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using GestionTallerDeMotos.Dtos;
+using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.ModelosDeDominio;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace GestionTallerDeMotos.Controllers.APIs
@@ -24,7 +23,8 @@ namespace GestionTallerDeMotos.Controllers.APIs
             var clientes = _context.Clientes
                 .Include(c => c.Personeria)
                 .Include(c => c.TipoDocumento)
-                .ToList();
+                .ToList()
+                .Select(Mapper.Map<Cliente, ClienteDto>);
 
             return Ok(clientes);
         }
