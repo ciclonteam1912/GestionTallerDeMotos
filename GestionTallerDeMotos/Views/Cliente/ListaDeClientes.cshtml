@@ -21,23 +21,34 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var cliente in Model)
-        {
-            <tr>
-                <td>@cliente.Nombre</td>
-                <td>@cliente.Apellido</td>
-                <td>@cliente.TipoDocumento.Descripcion</td>
-                <td>@cliente.ValorDocumento</td>
-                <td>@cliente.Personeria.Descripcion</td>
-            </tr>
-        }
-    </tbody>
 </table>
 
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $("#clientes").DataTable();
+            $("#clientes").DataTable({
+                ajax: {
+                    url: "/api/clientes",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "Nombre"
+                    },
+                    {
+                        data: "Apellido"
+                    },
+                    {
+                        data: "TipoDocumento.Descripcion"
+                    },
+                    {
+                        data: "ValorDocumento"
+                    },
+                    {
+                        data: "Personeria.Descripcion"
+                    }
+                ]
+            });
         })
     </script>    
 }
