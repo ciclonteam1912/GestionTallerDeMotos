@@ -3,6 +3,10 @@
     padding-bottom: 20px;
 }
 
+thead, tfoot {
+    display: none;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -23,7 +27,7 @@ textarea {
     max-width: 280px;
 }
 
-.field-validation-error {
+.field-validation-error, .validation-summary-errors {
     color: red;
 }
 
