@@ -17,10 +17,12 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Marca, Marca>();
             Mapper.CreateMap<Marca, MarcaDto>();
             Mapper.CreateMap<Modelo, ModeloDto>();
+            Mapper.CreateMap<Combustible, CombustibleDto>();
 
             //DTO a Dominio
             Mapper.CreateMap<MarcaDto, Marca>();
             Mapper.CreateMap<ModeloDto, Modelo>();
+            Mapper.CreateMap<CombustibleDto, Combustible>();
         }
     }
 }
