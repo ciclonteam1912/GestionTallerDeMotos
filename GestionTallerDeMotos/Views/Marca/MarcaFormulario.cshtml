@@ -1,0 +1,27 @@
+﻿@model GestionTallerDeMotos.Models.ModelosDeDominio.Marca
+@{
+    ViewBag.Title = Model.Titulo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Titulo</h2>
+
+@using(Html.BeginForm("GuardarMarca", "Marca"))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">@Model.Titulo</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nombre)
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese Nombre de la Marca..." })
+                @Html.ValidationMessageFor(m => m.Nombre)
+            </div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.AntiForgeryToken()
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+}
+

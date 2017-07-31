@@ -14,6 +14,7 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Cliente, ClienteDto>();
             Mapper.CreateMap<Personeria, PersoneriaDto>();
             Mapper.CreateMap<TipoDocumento, TipoDocumentoDto>();
+            Mapper.CreateMap<Marca, Marca>();
             Mapper.CreateMap<Marca, MarcaDto>();
             Mapper.CreateMap<Modelo, ModeloDto>();
 

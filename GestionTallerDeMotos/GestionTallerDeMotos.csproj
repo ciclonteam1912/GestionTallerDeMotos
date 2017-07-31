@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
     <Compile Include="Dtos\MarcaDto.cs" />
     <Compile Include="Dtos\ModeloDto.cs" />
@@ -562,6 +563,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cliente\ClienteFormulario.cshtml" />
     <Content Include="Views\Cliente\ListaDeClientes.cshtml" />
+    <Content Include="Views\Marca\ListaDeMarcas.cshtml" />
+    <Content Include="Views\Marca\MarcaFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
