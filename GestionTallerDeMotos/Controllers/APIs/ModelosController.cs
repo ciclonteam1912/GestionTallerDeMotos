@@ -4,6 +4,7 @@ using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpGet]
         public IHttpActionResult ObtenerModelos()
         {
-            var modelos = _context.Modelos.ToList().Select(Mapper.Map<Modelo, ModeloDto>);
+            var modelos = _context.Modelos.Include(m => m.Marca).ToList().Select(Mapper.Map<Modelo, ModeloDto>);
 
             return Ok(modelos);
         }

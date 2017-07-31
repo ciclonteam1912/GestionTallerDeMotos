@@ -6,6 +6,8 @@
 
         public string Nombre { get; set; }
 
+        public MarcaDto Marca { get; set; }
+
         public byte MarcaId { get; set; }
     }
 }
