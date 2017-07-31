@@ -19,6 +19,7 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Modelo, ModeloDto>();
             Mapper.CreateMap<Combustible, Combustible>();
             Mapper.CreateMap<Combustible, CombustibleDto>();
+            Mapper.CreateMap<Aseguradora, Aseguradora>();
             Mapper.CreateMap<Aseguradora, AseguradoraDto>();
 
             //DTO a Dominio

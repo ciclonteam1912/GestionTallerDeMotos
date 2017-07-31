@@ -21,5 +21,29 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
 
         [Display(Name = "Correo Electrónico")]
         public string CorreoElectronico { get; set; }
+
+        public string Titulo
+        {
+            get
+            {
+                return Id != 0 ? "Editar Aseguradora" : "Nueva Aseguradora";
+            }
+        }
+
+        public Aseguradora()
+        {
+
+        }
+
+        public Aseguradora(Aseguradora aseguradora)
+        {
+            Id = aseguradora.Id;
+            Nombre = aseguradora.Nombre;
+            Contacto = aseguradora.Contacto;
+            Ruc = aseguradora.Ruc;
+            Direccion = aseguradora.Direccion;
+            Telefono = aseguradora.Telefono;
+            CorreoElectronico = aseguradora.CorreoElectronico;
+        }
     }
 }
