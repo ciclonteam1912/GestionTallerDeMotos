@@ -203,14 +203,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ConfiguracionDeEntidades\ClienteConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\MarcaConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\ModeloConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\PersoneriaConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\TipoDocumentoConfiguracion.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIs\ClientesController.cs" />
+    <Compile Include="Controllers\APIs\MarcasController.cs" />
+    <Compile Include="Controllers\APIs\ModelosController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
+    <Compile Include="Dtos\MarcaDto.cs" />
+    <Compile Include="Dtos\ModeloDto.cs" />
     <Compile Include="Dtos\PersoneriaDto.cs" />
     <Compile Include="Dtos\TipoDocumentoDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,11 +246,21 @@
     <Compile Include="Migrations\201707282040588_AgregarColumnaValorDocumentoEnTablaDeClientes.Designer.cs">
       <DependentUpon>201707282040588_AgregarColumnaValorDocumentoEnTablaDeClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707301557020_CreacionDeTablasMarcas.cs" />
+    <Compile Include="Migrations\201707301557020_CreacionDeTablasMarcas.Designer.cs">
+      <DependentUpon>201707301557020_CreacionDeTablasMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707301618061_CreacionDeTablasModelos.cs" />
+    <Compile Include="Migrations\201707301618061_CreacionDeTablasModelos.Designer.cs">
+      <DependentUpon>201707301618061_CreacionDeTablasModelos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelosDeDominio\Cliente.cs" />
+    <Compile Include="Models\ModelosDeDominio\Marca.cs" />
+    <Compile Include="Models\ModelosDeDominio\Modelo.cs" />
     <Compile Include="Models\ModelosDeDominio\Personeria.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -583,6 +599,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707282040588_AgregarColumnaValorDocumentoEnTablaDeClientes.resx">
       <DependentUpon>201707282040588_AgregarColumnaValorDocumentoEnTablaDeClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707301557020_CreacionDeTablasMarcas.resx">
+      <DependentUpon>201707301557020_CreacionDeTablasMarcas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707301618061_CreacionDeTablasModelos.resx">
+      <DependentUpon>201707301618061_CreacionDeTablasModelos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

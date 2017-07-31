@@ -25,6 +25,8 @@ namespace GestionTallerDeMotos.Models
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Personeria> Personerias { get; set; }
         public DbSet<TipoDocumento> TiposDocumento { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Modelo> Modelos { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -37,7 +39,9 @@ namespace GestionTallerDeMotos.Models
 
             modelBuilder.Configurations.Add(new ClienteConfiguracion());
             modelBuilder.Configurations.Add(new PersoneriaConfiguracion());
-            modelBuilder.Configurations.Add(new TipoDocumentoConfiguracion());                     
+            modelBuilder.Configurations.Add(new TipoDocumentoConfiguracion());
+            modelBuilder.Configurations.Add(new MarcaConfiguracion());
+            modelBuilder.Configurations.Add(new ModeloConfiguracion());
         }
 
         public static ApplicationDbContext Create()
