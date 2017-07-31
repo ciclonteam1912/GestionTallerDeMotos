@@ -214,6 +214,7 @@
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CombustibleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
@@ -577,6 +578,8 @@
     <Content Include="Views\Marca\MarcaFormulario.cshtml" />
     <Content Include="Views\Modelo\ListaDeModelos.cshtml" />
     <Content Include="Views\Modelo\ModeloFormulario.cshtml" />
+    <Content Include="Views\Combustible\ListaDeCombustibles.cshtml" />
+    <Content Include="Views\Combustible\CombustibleFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
