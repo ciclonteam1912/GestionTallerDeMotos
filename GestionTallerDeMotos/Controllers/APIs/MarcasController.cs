@@ -31,6 +31,9 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpPost]
         public IHttpActionResult CrearMarca(MarcaDto marcaDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var marca = Mapper.Map<MarcaDto, Marca>(marcaDto);
 
             _context.Marcas.Add(marca);

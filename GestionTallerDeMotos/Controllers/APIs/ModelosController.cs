@@ -32,6 +32,9 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpPost]
         public IHttpActionResult CrearModelo(ModeloDto modeloDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var modelo = Mapper.Map<ModeloDto, Modelo>(modeloDto);
 
             _context.Modelos.Add(modelo);

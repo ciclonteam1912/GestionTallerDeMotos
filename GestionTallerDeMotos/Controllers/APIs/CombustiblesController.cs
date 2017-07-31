@@ -31,6 +31,9 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpPost]
         public IHttpActionResult CrearCombustible(CombustibleDto combustibleDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var combustible = Mapper.Map<CombustibleDto, Combustible>(combustibleDto);
 
             _context.Combustibles.Add(combustible);
