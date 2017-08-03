@@ -105,7 +105,10 @@
                         data: "Modelo.Nombre"
                     },
                     {
-                        data: "Cliente.Nombre"
+                        data: "Cliente.Nombre",
+                        render: function (data, type, cliente) {                            
+                            return cliente.Cliente.Nombre + " " + cliente.Cliente.Apellido;
+                        }
                     },
                     {
                         data: "Aseguradora.Nombre"

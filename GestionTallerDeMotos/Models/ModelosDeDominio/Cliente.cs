@@ -41,5 +41,13 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
         [Required]
         [Display(Name = "Valor del Documento")]
         public string ValorDocumento { get; set; }
+
+        public string NombreCompleto
+        {
+            get
+            {
+                return Nombre.ToUpper() + " " + Apellido.ToUpper();
+            }
+        }
     }
 }
