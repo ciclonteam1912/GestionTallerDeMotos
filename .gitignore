@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/GestionTallerDeMotos/Views/Shared/_MenuVertical.cshtml
+/GestionTallerDeMotos/Controllers/VehiculoController.cs
+/GestionTallerDeMotos/ViewModels/VehiculoViewModel.cs
+/GestionTallerDeMotos/Views/Vehiculo

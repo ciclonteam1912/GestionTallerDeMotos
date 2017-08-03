@@ -29,6 +29,7 @@ namespace GestionTallerDeMotos.Models
         public DbSet<Modelo> Modelos { get; set; }
         public DbSet<Combustible> Combustibles { get; set; }
         public DbSet<Aseguradora> Aseguradoras { get; set; }
+        public DbSet<Vehiculo> Vehiculos { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -46,6 +47,7 @@ namespace GestionTallerDeMotos.Models
             modelBuilder.Configurations.Add(new ModeloConfiguracion());
             modelBuilder.Configurations.Add(new CombustibleConfiguracion());
             modelBuilder.Configurations.Add(new AseguradoraConfiguracion());
+            modelBuilder.Configurations.Add(new VehiculoConfiguracion());
         }
 
         public static ApplicationDbContext Create()

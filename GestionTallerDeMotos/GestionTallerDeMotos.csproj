@@ -209,12 +209,14 @@
     <Compile Include="ConfiguracionDeEntidades\ModeloConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\PersoneriaConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\TipoDocumentoConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\VehiculoConfiguracion.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIs\AseguradorasController.cs" />
     <Compile Include="Controllers\APIs\ClientesController.cs" />
     <Compile Include="Controllers\APIs\CombustiblesController.cs" />
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
+    <Compile Include="Controllers\APIs\VehiculosController.cs" />
     <Compile Include="Controllers\AseguradoraController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CombustibleController.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
+    <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Dtos\AseguradoraDto.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
     <Compile Include="Dtos\CombustibleDto.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="Dtos\ModeloDto.cs" />
     <Compile Include="Dtos\PersoneriaDto.cs" />
     <Compile Include="Dtos\TipoDocumentoDto.cs" />
+    <Compile Include="Dtos\VehiculoDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -272,6 +276,18 @@
     <Compile Include="Migrations\201707311712260_CreacionDeTablaAseguradoras.Designer.cs">
       <DependentUpon>201707311712260_CreacionDeTablaAseguradoras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708011441576_CreacionDeTablaVehiculos.cs" />
+    <Compile Include="Migrations\201708011441576_CreacionDeTablaVehiculos.Designer.cs">
+      <DependentUpon>201708011441576_CreacionDeTablaVehiculos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708011451105_CambiarNombreDeTablasAVehiculos.cs" />
+    <Compile Include="Migrations\201708011451105_CambiarNombreDeTablasAVehiculos.Designer.cs">
+      <DependentUpon>201708011451105_CambiarNombreDeTablasAVehiculos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708030105028_CambiarConstraintsANullParaKilometroYCilindrada.cs" />
+    <Compile Include="Migrations\201708030105028_CambiarConstraintsANullParaKilometroYCilindrada.Designer.cs">
+      <DependentUpon>201708030105028_CambiarConstraintsANullParaKilometroYCilindrada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -283,10 +299,12 @@
     <Compile Include="Models\ModelosDeDominio\Modelo.cs" />
     <Compile Include="Models\ModelosDeDominio\Personeria.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
+    <Compile Include="Models\ModelosDeDominio\Vehiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\ModeloViewModel.cs" />
+    <Compile Include="ViewModels\VehiculoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -591,6 +609,9 @@
     <Content Include="Views\Combustible\CombustibleFormulario.cshtml" />
     <Content Include="Views\Aseguradora\ListaDeAseguradoras.cshtml" />
     <Content Include="Views\Aseguradora\AseguradoraFormulario.cshtml" />
+    <Content Include="Views\Shared\_MenuVertical.cshtml" />
+    <Content Include="Views\Vehiculo\ListaDeVehiculos.cshtml" />
+    <Content Include="Views\Vehiculo\VehiculoFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -640,6 +661,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707311712260_CreacionDeTablaAseguradoras.resx">
       <DependentUpon>201707311712260_CreacionDeTablaAseguradoras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708011441576_CreacionDeTablaVehiculos.resx">
+      <DependentUpon>201708011441576_CreacionDeTablaVehiculos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708011451105_CambiarNombreDeTablasAVehiculos.resx">
+      <DependentUpon>201708011451105_CambiarNombreDeTablasAVehiculos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708030105028_CambiarConstraintsANullParaKilometroYCilindrada.resx">
+      <DependentUpon>201708030105028_CambiarConstraintsANullParaKilometroYCilindrada.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

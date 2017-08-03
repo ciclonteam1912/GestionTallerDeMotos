@@ -21,12 +21,17 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Combustible, CombustibleDto>();
             Mapper.CreateMap<Aseguradora, Aseguradora>();
             Mapper.CreateMap<Aseguradora, AseguradoraDto>();
+            Mapper.CreateMap<Vehiculo, Vehiculo>()
+                .ForMember(v => v.FechaDeIngreso, opt => opt.Ignore());
+            Mapper.CreateMap<Vehiculo, VehiculoDto>();
 
             //DTO a Dominio
             Mapper.CreateMap<MarcaDto, Marca>();
             Mapper.CreateMap<ModeloDto, Modelo>();
             Mapper.CreateMap<CombustibleDto, Combustible>();
             Mapper.CreateMap<AseguradoraDto, Aseguradora>();
+            Mapper.CreateMap<VehiculoDto, Vehiculo>()
+                .ForMember(v => v.FechaDeIngreso, opt => opt.Ignore());
         }
     }
 }
