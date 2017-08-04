@@ -208,6 +208,7 @@
     <Compile Include="ConfiguracionDeEntidades\MarcaConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ModeloConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\PersoneriaConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\ProductoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ProveedorConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\TipoDocumentoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\VehiculoConfiguracion.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Controllers\APIs\CombustiblesController.cs" />
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
+    <Compile Include="Controllers\APIs\ProductosController.cs" />
     <Compile Include="Controllers\APIs\ProveedoresController.cs" />
     <Compile Include="Controllers\APIs\VehiculosController.cs" />
     <Compile Include="Controllers\AseguradoraController.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Dtos\MarcaDto.cs" />
     <Compile Include="Dtos\ModeloDto.cs" />
     <Compile Include="Dtos\PersoneriaDto.cs" />
+    <Compile Include="Dtos\ProductoDto.cs" />
     <Compile Include="Dtos\ProveedorDto.cs" />
     <Compile Include="Dtos\TipoDocumentoDto.cs" />
     <Compile Include="Dtos\VehiculoDto.cs" />
@@ -296,6 +299,10 @@
     <Compile Include="Migrations\201708031418248_CreacionDeTablaProveedores.Designer.cs">
       <DependentUpon>201708031418248_CreacionDeTablaProveedores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708041530257_CreacionDeTablaProductos.cs" />
+    <Compile Include="Migrations\201708041530257_CreacionDeTablaProductos.Designer.cs">
+      <DependentUpon>201708041530257_CreacionDeTablaProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -306,6 +313,7 @@
     <Compile Include="Models\ModelosDeDominio\Marca.cs" />
     <Compile Include="Models\ModelosDeDominio\Modelo.cs" />
     <Compile Include="Models\ModelosDeDominio\Personeria.cs" />
+    <Compile Include="Models\ModelosDeDominio\Producto.cs" />
     <Compile Include="Models\ModelosDeDominio\Proveedor.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
     <Compile Include="Models\ModelosDeDominio\Vehiculo.cs" />
@@ -684,6 +692,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708031418248_CreacionDeTablaProveedores.resx">
       <DependentUpon>201708031418248_CreacionDeTablaProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708041530257_CreacionDeTablaProductos.resx">
+      <DependentUpon>201708041530257_CreacionDeTablaProductos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
