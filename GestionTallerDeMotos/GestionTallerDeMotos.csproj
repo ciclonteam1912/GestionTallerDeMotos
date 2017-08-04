@@ -218,6 +218,7 @@
     <Compile Include="Controllers\APIs\CombustiblesController.cs" />
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
+    <Compile Include="Controllers\APIs\ProductoController.cs" />
     <Compile Include="Controllers\APIs\ProductosController.cs" />
     <Compile Include="Controllers\APIs\ProveedoresController.cs" />
     <Compile Include="Controllers\APIs\VehiculosController.cs" />
@@ -303,6 +304,10 @@
     <Compile Include="Migrations\201708041530257_CreacionDeTablaProductos.Designer.cs">
       <DependentUpon>201708041530257_CreacionDeTablaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708042106084_CambiarLongitudDeColumnaMarcaEnTablaProductos.cs" />
+    <Compile Include="Migrations\201708042106084_CambiarLongitudDeColumnaMarcaEnTablaProductos.Designer.cs">
+      <DependentUpon>201708042106084_CambiarLongitudDeColumnaMarcaEnTablaProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -321,6 +326,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\ModeloViewModel.cs" />
+    <Compile Include="ViewModels\ProductoViewModel.cs" />
     <Compile Include="ViewModels\VehiculoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -631,6 +637,8 @@
     <Content Include="Views\Vehiculo\VehiculoFormulario.cshtml" />
     <Content Include="Views\Proveedor\ListaDeProveedores.cshtml" />
     <Content Include="Views\Proveedor\ProveedorFormulario.cshtml" />
+    <Content Include="Views\Producto\ListaDeProductos.cshtml" />
+    <Content Include="Views\Producto\ProductoFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -695,6 +703,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708041530257_CreacionDeTablaProductos.resx">
       <DependentUpon>201708041530257_CreacionDeTablaProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708042106084_CambiarLongitudDeColumnaMarcaEnTablaProductos.resx">
+      <DependentUpon>201708042106084_CambiarLongitudDeColumnaMarcaEnTablaProductos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

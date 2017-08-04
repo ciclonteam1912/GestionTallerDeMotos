@@ -1,0 +1,82 @@
+﻿@model GestionTallerDeMotos.ViewModels.ProductoViewModel
+@{
+    ViewBag.Title = Model.Titulo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Titulo</h2>
+
+@using (Html.BeginForm("GuardarProducto", "Producto"))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">@Model.Titulo</div>
+        <div class="panel-body">
+            <div class="row">
+                @Html.ValidationSummary(true, "¡Por favor soluciona los siguientes errores!")
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.Descripcion)
+                        @Html.TextBoxFor(v => v.Descripcion, new { @class = "form-control", placeholder = "Ingrese Descripción del Producto..." })
+                        @Html.ValidationMessageFor(v => v.Descripcion)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.Marca)
+                        @Html.TextBoxFor(v => v.Marca,  new { @class = "form-control", placeholder = "Ingrese Marca del Producto..." })
+                        @Html.ValidationMessageFor(v => v.Marca)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.PrecioCosto)
+                        @Html.TextBoxFor(v => v.PrecioCosto, new { @class = "form-control", placeholder = "Ingrese Precio Costo del Producto..." })
+                        @Html.ValidationMessageFor(v => v.PrecioCosto)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.PrecioVenta)
+                        @Html.TextBoxFor(v => v.PrecioVenta, new { @class = "form-control", placeholder = "Ingrese Precio Venta del Producto..." })
+                        @Html.ValidationMessageFor(v => v.PrecioVenta)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.ExistenciaActual)
+                        @Html.TextBoxFor(v => v.ExistenciaActual, new { @class = "form-control", placeholder = "Ingrese Existencia Actual del Producto..." })
+                        @Html.ValidationMessageFor(v => v.ExistenciaActual)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.ExistenciaMinima)
+                        @Html.TextBoxFor(v => v.ExistenciaMinima, new { @class = "form-control", placeholder = "Ingrese Existencia Mínima del Producto..." })
+                        @Html.ValidationMessageFor(v => v.ExistenciaMinima)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(v => v.ProveedorId)
+                        @Html.DropDownListFor(v => v.ProveedorId, new SelectList(Model.Proveedores, "Id", "RazonSocial"), "Seleccione un Proveedor", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(v => v.ProveedorId)
+                    </div>
+                </div>
+            </div>            
+            @Html.HiddenFor(v => v.Id)
+            @Html.AntiForgeryToken()
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+}
+

@@ -17,7 +17,7 @@ namespace GestionTallerDeMotos.ConfiguracionDeEntidades
                 .HasMaxLength(50);
 
             Property(p => p.Marca)
-                .HasMaxLength(20);
+                .HasMaxLength(50);
 
             Property(p => p.ProveedorId)
                 .HasColumnName("ProveedorCodigo");
