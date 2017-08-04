@@ -24,6 +24,7 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Vehiculo, Vehiculo>()
                 .ForMember(v => v.FechaDeIngreso, opt => opt.Ignore());
             Mapper.CreateMap<Vehiculo, VehiculoDto>();
+            Mapper.CreateMap<Proveedor, Proveedor>();
             Mapper.CreateMap<Proveedor, ProveedorDto>();
 
             //DTO a Dominio

@@ -226,6 +226,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Dtos\AseguradoraDto.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
@@ -620,6 +621,8 @@
     <Content Include="Views\Shared\_MenuVertical.cshtml" />
     <Content Include="Views\Vehiculo\ListaDeVehiculos.cshtml" />
     <Content Include="Views\Vehiculo\VehiculoFormulario.cshtml" />
+    <Content Include="Views\Proveedor\ListaDeProveedores.cshtml" />
+    <Content Include="Views\Proveedor\ProveedorFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
