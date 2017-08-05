@@ -17,61 +17,61 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        @Html.LabelFor(v => v.Descripcion)
-                        @Html.TextBoxFor(v => v.Descripcion, new { @class = "form-control", placeholder = "Ingrese Descripción del Producto..." })
-                        @Html.ValidationMessageFor(v => v.Descripcion)
+                        @Html.LabelFor(p => p.Descripcion)
+                        @Html.TextBoxFor(p => p.Descripcion, new { @class = "form-control", placeholder = "Ingrese Descripción del Producto..." })
+                        @Html.ValidationMessageFor(p => p.Descripcion)
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        @Html.LabelFor(v => v.Marca)
-                        @Html.TextBoxFor(v => v.Marca,  new { @class = "form-control", placeholder = "Ingrese Marca del Producto..." })
-                        @Html.ValidationMessageFor(v => v.Marca)
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        @Html.LabelFor(v => v.PrecioCosto)
-                        @Html.TextBoxFor(v => v.PrecioCosto, new { @class = "form-control", placeholder = "Ingrese Precio Costo del Producto..." })
-                        @Html.ValidationMessageFor(v => v.PrecioCosto)
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        @Html.LabelFor(v => v.PrecioVenta)
-                        @Html.TextBoxFor(v => v.PrecioVenta, new { @class = "form-control", placeholder = "Ingrese Precio Venta del Producto..." })
-                        @Html.ValidationMessageFor(v => v.PrecioVenta)
+                        @Html.LabelFor(p => p.Marca)
+                        @Html.TextBoxFor(p => p.Marca,  new { @class = "form-control", placeholder = "Ingrese Marca del Producto..." })
+                        @Html.ValidationMessageFor(p => p.Marca)
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        @Html.LabelFor(v => v.ExistenciaActual)
-                        @Html.TextBoxFor(v => v.ExistenciaActual, new { @class = "form-control", placeholder = "Ingrese Existencia Actual del Producto..." })
-                        @Html.ValidationMessageFor(v => v.ExistenciaActual)
+                        @Html.LabelFor(p => p.PrecioCosto)
+                        @Html.TextBoxFor(p => p.PrecioCosto, new { @class = "form-control", placeholder = "Ingrese Precio Costo del Producto..." })
+                        @Html.ValidationMessageFor(p => p.PrecioCosto)
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        @Html.LabelFor(v => v.ExistenciaMinima)
-                        @Html.TextBoxFor(v => v.ExistenciaMinima, new { @class = "form-control", placeholder = "Ingrese Existencia Mínima del Producto..." })
-                        @Html.ValidationMessageFor(v => v.ExistenciaMinima)
+                        @Html.LabelFor(p => p.PrecioVenta)
+                        @Html.TextBoxFor(p => p.PrecioVenta, new { @class = "form-control", placeholder = "Ingrese Precio Venta del Producto..." })
+                        @Html.ValidationMessageFor(p => p.PrecioVenta)
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        @Html.LabelFor(v => v.ProveedorId)
-                        @Html.DropDownListFor(v => v.ProveedorId, new SelectList(Model.Proveedores, "Id", "RazonSocial"), "Seleccione un Proveedor", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(v => v.ProveedorId)
+                        @Html.LabelFor(p => p.ExistenciaActual)
+                        @Html.TextBoxFor(p => p.ExistenciaActual, new { @class = "form-control", placeholder = "Ingrese Existencia Actual del Producto..." })
+                        @Html.ValidationMessageFor(p => p.ExistenciaActual)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ExistenciaMinima)
+                        @Html.TextBoxFor(p => p.ExistenciaMinima, new { @class = "form-control", placeholder = "Ingrese Existencia Mínima del Producto..." })
+                        @Html.ValidationMessageFor(p => p.ExistenciaMinima)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ProveedorId)
+                        @Html.DropDownListFor(p => p.ProveedorId, new SelectList(Model.Proveedores, "Id", "RazonSocial"), "Seleccione un Proveedor", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.ProveedorId)
                     </div>
                 </div>
             </div>            
-            @Html.HiddenFor(v => v.Id)
+            @Html.HiddenFor(p => p.Id)
             @Html.AntiForgeryToken()
         </div>
         <div class="panel-footer">
