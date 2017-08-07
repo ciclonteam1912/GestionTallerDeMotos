@@ -34,3 +34,102 @@ textarea {
 .input-validation-error {
     border: 2px solid red;
 }
+
+
+/****************** MENU VERTICAL ********************/
+#contenido h2 {
+    text-align: center;
+}
+
+i.fa {
+    font-size: 30px;
+    float: left;
+    cursor: pointer;
+}
+
+.contenedor-menu {
+    position: fixed;
+    left: 0;
+    overflow-x: hidden;
+    height: 100%;
+    z-index: 1;
+    /*display: inline-block;*/
+    line-height: 30px;
+    background-color: #e9e9e9;
+    width: 0;
+    transition: 0.5s;
+}
+
+.contenedor-menu .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #999999;
+}
+
+.contenedor-menu h3 {
+    padding: 10px;
+    background: #222222;
+    margin: 0;
+    color: #999999;
+}
+
+.contenedor-menu li {
+    border: 1px solid #222222;
+    transition-property: border;
+    transition-duration: 0.3s;
+}
+
+.contenedor-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contenedor-menu .menu li a {
+    display : block;
+    padding: 5px 10px;
+    background: #e9e9e9;
+}
+
+.contenedor-menu .menu li a:hover {
+    background: #1a95d5;
+    text-decoration: none;
+    color: white;
+    border-left: 5px solid #e9e9e9;
+}
+
+.contenedor-menu .menu .icono {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 5px;
+}
+
+.contenedor-menu .menu .icono.izquierda {
+    float: left;
+    margin-right: 10px;
+}
+
+.contenedor-menu .menu .icono.derecha {
+    float: right;
+    margin-left: 10px;
+}
+
+.contenedor-menu .menu ul {
+    display: none;
+}
+
+.contenedor-menu .menu ul li a {
+    background: #424242;
+    color: #e9e9e9;
+}
+
+.contenedor-menu .menu .activado > a {
+    background: #1a95d5;
+    color: white;
+}
+
+.abrir {
+    transform: translateX(250px);
+}

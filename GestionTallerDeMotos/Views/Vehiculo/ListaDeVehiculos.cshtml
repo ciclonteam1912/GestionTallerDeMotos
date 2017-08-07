@@ -4,44 +4,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista De Vehiculos</h2>
+
+@Html.Partial("_MenuVertical")
 
 
-<p>
-    @Html.ActionLink("Nuevo Vehiculo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
-</p>
 
-<table id="vehiculos" class="table table-bordered table-hover table-responsive">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Matrícula</th>
-            <th>Chasis</th>
-            <th>Motor</th>
-            <th>Modelo</th>
-            <th>Cliente</th>
-            <th>Aseguradora</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Matrícula</th>
-            <th>Chasis</th>
-            <th>Motor</th>
-            <th>Modelo</th>
-            <th>Cliente</th>
-            <th>Aseguradora</th>
-        </tr>
-    </tfoot>
-</table>
+<div id="contenido">
+    <i class="fa fa-bars menu-bar"></i>
+    <h2>Lista De Vehiculos</h2>
+
+
+    <p>
+        @Html.ActionLink("Nuevo Vehiculo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
+    </p>
+
+    <table id="vehiculos" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Matrícula</th>
+                <th>Chasis</th>
+                <th>Motor</th>
+                <th>Modelo</th>
+                <th>Cliente</th>
+                <th>Aseguradora</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Matrícula</th>
+                <th>Chasis</th>
+                <th>Motor</th>
+                <th>Modelo</th>
+                <th>Cliente</th>
+                <th>Aseguradora</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
 
 @section Scripts{
     <script>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("contenido").style.marginLeft = "0";
+        }
+
+        $(".menu-bar").click(function () {
+            $(".contenedor-menu").width("250px");
+        })
+
         $(document).ready(function () {
+            $(".menu li:has(ul)").click(function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('activado')) {
+                    $(this).removeClass('activado');
+                    $(this).children('ul').slideUp();
+                } else {
+                    $(".menu li ul").slideUp();
+                    $(".menu li").removeClass('activado');
+                    $(this).addClass('activado');
+                    $(this).children('ul').slideDown();
+                }
+            });
+
+            $(".menu li ul li a").click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+
             $("thead").show();
             $("tfoot").show();
 
