@@ -4,36 +4,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista De Modelos</h2>
+@Html.Partial("_MenuVertical")
 
+<div id="contenido">
+    <i class="fa fa-bars menu-bar"></i>
+    <h2>Lista De Modelos</h2>
 
-<p>
-    @Html.ActionLink("Nuevo Modelo", "NuevoModelo", "Modelo", new { @class = "btn btn-primary" })
-</p>
+    <p>
+        @Html.ActionLink("Nuevo Modelo", "NuevoModelo", "Modelo", new { @class = "btn btn-primary" })
+    </p>
 
-<table id="modelos" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Marca</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Marca</th>
-        </tr>
-    </tfoot>
-</table>
+    <table id="modelos" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
 
 @section Scripts{
     <script>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("contenido").style.marginLeft = "0";
+        }
+
+        $(".menu-bar").click(function () {
+            $(".contenedor-menu").width("250px");
+        });
+
         $(document).ready(function () {
+            $(".menu li:has(ul)").click(function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('activado')) {
+                    $(this).removeClass('activado');
+                    $(this).children('ul').slideUp();
+                } else {
+                    $(".menu li ul").slideUp();
+                    $(".menu li").removeClass('activado');
+                    $(this).addClass('activado');
+                    $(this).children('ul').slideDown();
+                }
+            });
+
+            $(".menu li ul li a").click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
             $("thead").show();
             $("tfoot").show();
 

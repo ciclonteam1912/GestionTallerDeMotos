@@ -4,10 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @Html.Partial("_MenuVertical")
-
-
 
 <div id="contenido">
     <i class="fa fa-bars menu-bar"></i>
@@ -57,7 +54,7 @@
 
         $(".menu-bar").click(function () {
             $(".contenedor-menu").width("250px");
-        })
+        });
 
         $(document).ready(function () {
             $(".menu li:has(ul)").click(function (e) {

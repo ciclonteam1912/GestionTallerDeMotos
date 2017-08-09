@@ -4,24 +4,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Titulo</h2>
+@Html.Partial("_MenuVertical")
 
-@using(Html.BeginForm("GuardarMarca", "Marca"))
-{
-    <div class="panel panel-default">
-        <div class="panel-heading">@Model.Titulo</div>
-        <div class="panel-body">
-            <div class="form-group">
-                @Html.LabelFor(m => m.Nombre)
-                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese Nombre de la Marca..." })
-                @Html.ValidationMessageFor(m => m.Nombre)
+
+<div id="contenido">
+    <i class="fa fa-bars menu-bar"></i>
+    <h2>@Model.Titulo</h2>
+
+    @using (Html.BeginForm("GuardarMarca", "Marca"))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@Model.Titulo</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nombre)
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese Nombre de la Marca..." })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                @Html.HiddenFor(m => m.Id)
+                @Html.AntiForgeryToken()
             </div>
-            @Html.HiddenFor(m => m.Id)
-            @Html.AntiForgeryToken()
+            <div class="panel-footer">
+                <button class="btn btn-primary">Guardar</button>
+            </div>
         </div>
-        <div class="panel-footer">
-            <button class="btn btn-primary">Guardar</button>
-        </div>
-    </div>
+    }
+</div>
+
+
+@section Scripts{
+    <script>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("contenido").style.marginLeft = "0";
+        }
+
+        $(".menu-bar").click(function () {
+            $(".contenedor-menu").width("250px");
+        });
+
+        $(document).ready(function () {
+            $(".menu li:has(ul)").click(function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('activado')) {
+                    $(this).removeClass('activado');
+                    $(this).children('ul').slideUp();
+                } else {
+                    $(".menu li ul").slideUp();
+                    $(".menu li").removeClass('activado');
+                    $(this).addClass('activado');
+                    $(this).children('ul').slideDown();
+                }
+            });
+
+            $(".menu li ul li a").click(function () {
+                window.location.href = $(this).attr('href');
+            });
+        });
+    </script>    
 }
 

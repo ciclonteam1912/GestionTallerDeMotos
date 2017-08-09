@@ -4,41 +4,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista De Aseguradoras</h2>
+@Html.Partial("_MenuVertical")
 
-<p>
-    @Html.ActionLink("Nueva Aseguradora", "NuevaAseguradora", "Aseguradora", new { @class = "btn btn-primary" })
-</p>
+<div id="contenido">
+    <i class="fa fa-bars menu-bar"></i>
+    <h2>Lista De Aseguradoras</h2>
 
-<table id="aseguradoras" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Contacto</th>
-            <th>RUC</th>
-            <th>Dirección</th>
-            <th>Correo Electrónico</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Contacto</th>
-            <th>RUC</th>
-            <th>Dirección</th>
-            <th>Correo Electrónico</th>
-        </tr>
-    </tfoot>
-</table>
+    <p>
+        @Html.ActionLink("Nueva Aseguradora", "NuevaAseguradora", "Aseguradora", new { @class = "btn btn-primary" })
+    </p>
+
+    <table id="aseguradoras" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>RUC</th>
+                <th>Dirección</th>
+                <th>Correo Electrónico</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>RUC</th>
+                <th>Dirección</th>
+                <th>Correo Electrónico</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
 @section Scripts{
     <script>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("contenido").style.marginLeft = "0";
+        }
+
+        $(".menu-bar").click(function () {
+            $(".contenedor-menu").width("250px");
+        });
+
         $(document).ready(function () {
+            $(".menu li:has(ul)").click(function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('activado')) {
+                    $(this).removeClass('activado');
+                    $(this).children('ul').slideUp();
+                } else {
+                    $(".menu li ul").slideUp();
+                    $(".menu li").removeClass('activado');
+                    $(this).addClass('activado');
+                    $(this).children('ul').slideDown();
+                }
+            });
+
+            $(".menu li ul li a").click(function () {
+                window.location.href = $(this).attr('href');
+            });           
+
             $("thead").show();
             $("tfoot").show();
 
