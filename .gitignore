@@ -263,3 +263,6 @@ __pycache__/
 /GestionTallerDeMotos/Controllers/VehiculoController.cs
 /GestionTallerDeMotos/ViewModels/VehiculoViewModel.cs
 /GestionTallerDeMotos/Views/Vehiculo
+/GestionTallerDeMotos/Content/images
+/GestionTallerDeMotos/ViewModels/PresupuestoDetalleViewModel.cs
+/GestionTallerDeMotos/Views/Presupuesto/PresupuestoDetalleFormulario.cshtml
