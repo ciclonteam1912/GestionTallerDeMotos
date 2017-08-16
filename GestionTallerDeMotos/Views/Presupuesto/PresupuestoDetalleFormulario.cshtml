@@ -1,0 +1,226 @@
+﻿@model GestionTallerDeMotos.ViewModels.PresupuestoDetalleViewModel
+@{
+    ViewBag.Title = "PresupuestoDetalleFormulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hoja de Presupuesto</h2>
+
+<form id="presupuestoFormulario">
+    <div class="form-group">
+        <label>Vehículo</label>
+        <input id="vehiculo" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Fecha de Emisión</label>
+        <input type="text" id="fechaEmision" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label style="display: block">Producto o Servicio</label>
+        <select id="productos" class="form-control" style="display: inline-block">
+            <option value="">Seleccione un Producto o Servicio...</option>
+        </select>
+        <button class="btn btn-warning" id="btnProductos" type="button">Seleccionar</button>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="aceptado" id="aceptado"/> ¿Presupuesto aceptado?
+        </label>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción del Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>               
+                <th>IVA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" id="productoId" readonly class="form-control" /></td>
+                <td><input type="text" id="productoDescripcion" readonly class="form-control" /></td>
+                <td><input type="text" id="productoPrecio" readonly class="form-control" /></td>
+                <td><input type="number" id="productoCantidad" class="form-control" /></td>
+                <td><input type="number" id="productoIva" class="form-control" /></td>
+                <td><input type="button" name="agregar" id="agregar" value="Agregar" class="btn btn-primary"/></td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="presupuestoDetalle" class="table">
+        <thead>
+            <tr>
+                <td>Detalle del Presupuesto</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <th>Descripción del Producto</th>               
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>IVA</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="form-group">
+        <label>Total a Pagar: </label>
+        <input type="text" name="totalAPagar" id="totalAPagar" value="" readonly class="form-control" />
+    </div>    
+
+    <div class="form-group">
+        <input class="btn btn-success" type="button" id="finalizar" value="Guardar" />
+        <input class="btn btn-success" type="button" id="txtnueva" value="Nuevo" />
+    </div>    
+</form>
+
+@section scripts {
+    <script>     
+        function probar() {
+            $('#presupuestoDetalle tr.detalle').each(function (index, tr) {
+                var lines = $('td', tr).map(function (index, td) {
+                    return $(td).text();
+                });
+                // Here lines will contain an array of all td values for the current row:
+                // like ['value 1', 'value 2', 'value 3']
+                //console.log(lines);
+
+            });
+        }
+
+        $(document).ready(function () {
+
+            var vm = {
+                Presupuesto: {},
+                PresupuestoDetalles: []
+            }
+
+
+            $("#productoCantidad").prop("disabled", true);
+            $("#productoIva").prop("disabled", true);
+            $("#agregar").prop("disabled", true);
+
+            var total = 0;
+            var subTotal = 0;
+
+            $("thead").show();
+            //Obtener los productos o servicios y agregarlos al Drop-down List.
+            $.ajax({
+                type: "GET",
+                url: "/api/productos",
+                contentType: "application/json",
+                success: function (result) {
+                    $.each(result, function (i) {
+                        $("#productos").append($('<option></option>').val(result[i].Id).html(result[i].Descripcion));
+                    });
+                }
+            });
+
+            $("#btnProductos").click(function () {
+                $("#productoCantidad").prop("disabled", false);
+                $("#productoIva").prop("disabled", false);
+                $("#agregar").prop("disabled", false);
+
+                var productoId = $("#productos").val();
+                $.ajax({
+                    url: "/api/productos/" + productoId,
+                    contentType: "application/json",
+                    method: "GET",
+                    success: function (data) {
+                        $(data).each(function (index, item) {
+                            $("#productoId").val(item.Id);
+                            $("#productoDescripcion").val(item.Descripcion);
+                            $("#productoPrecio").val(item.PrecioVenta);
+                        });
+                    }
+
+                });
+            });
+
+
+            $("#agregar").click(function () {
+                $("#productoCantidad").prop("disabled", true);
+                $("#productoIva").prop("disabled", true);
+                $("#agregar").prop("disabled", true);
+
+                var productoId = $("#productoId").val();
+                var productoDescripcion = $("#productoDescripcion").val();
+                var productoPrecio = $("#productoPrecio").val();
+                var productoCantidad = $("#productoCantidad").val();
+                var productoIva = $("#productoIva").val();
+                total = (productoPrecio * productoCantidad) - (((productoPrecio * productoCantidad) * productoIva) / 100);
+                subTotal = subTotal + total;
+                $("#totalAPagar").val(subTotal);
+                var presupuesto = '<tr class="detalle">' +
+                    '<td>' + productoId + '</td>' +
+                    '<td>' + productoDescripcion + '</td>' +
+                    '<td>' + productoPrecio + '</td>' +
+                    '<td>' + productoCantidad + '</td>' +
+                    '<td>' + productoIva + '</td>' +
+                    '<td>' + total + '</td>' +
+                    '<td class="eliminar-fila"><button id="eliminar" class="btn btn-danger eliminar" type="button"><span class="fa fa-remove"></span></button></td>' +
+                    '</tr>';                
+
+                $("#presupuestoDetalle tbody").append(presupuesto);
+
+                $("tbody").on("click", ".eliminar", function () {
+                    valor = $(this).closest("tr").find("td").eq(5).text();
+                    //console.log(valor);
+                    $(this).parents("tr").fadeOut("normal", function () {
+                        $(this).remove();
+                        subTotal = subTotal - valor;
+                        $("#totalAPagar").val(subTotal);
+                    });
+
+                    probar();
+                });
+
+                $("#productoId").val("");
+                $("#productoDescripcion").val("");
+                $("#productoPrecio").val("");
+                $("#productoCantidad").val("");
+                $("#productoIva").val("");
+
+                probar();
+            });  
+
+            $("#finalizar").click(function () {
+                vm.Presupuesto = {
+                    FechaEmision: $("#fechaEmision").val(),
+                    PresupuestoAceptado: $("#aceptado").val(),
+                    VehiculoId: $("#vehiculo").val()
+                };
+
+                $('#presupuestoDetalle tr.detalle').each(function (index, tr) {
+                    
+                    var lines = $('td', tr).map(function (index, td) {
+                        //console.log(td);
+                        if (index != 6 && index != 1)                            
+                            return $(td).text();
+                    });
+
+                    vm.PresupuestoDetalles.push({
+                        ProductoId: lines[0],
+                        Precio: lines[1],
+                        Cantidad: lines[2],
+                        Iva: lines[3],
+                        SubTotal: lines[4]
+                    });
+                    //console.log(lines);
+                });
+
+                $.ajax({
+                    url: "/api/presupuestos",
+                    method: "post",
+                    data: vm,
+                    success: function () {
+                        console.log("ok");
+                    }
+                });
+
+                console.log(vm);
+            });
+        });          
+    </script>    
+}
