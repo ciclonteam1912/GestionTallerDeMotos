@@ -213,14 +213,29 @@
                 $.ajax({
                     url: "/api/presupuestos",
                     method: "post",
-                    data: vm,
-                    success: function () {
-                        console.log("ok");
-                    }
+                    data: vm
+                })
+                .done(function () {
+                    toastr.success("Hoja de Presupuesto creada con éxito.");
+                })
+                .fail(function () {
+                    toastr.error("Algo inesperado ha ocurrido.");
                 });
 
                 console.log(vm);
             });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         });          
     </script>    
 }

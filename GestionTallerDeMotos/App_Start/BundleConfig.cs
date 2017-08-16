@@ -12,6 +12,7 @@ namespace GestionTallerDeMotos
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
+                        "~/Scripts/toastr.js",
                         "~/Scripts/DataTables/dataTables.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -26,6 +27,7 @@ namespace GestionTallerDeMotos
                       "~/Content/bootstrap.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/FontAwesome-4.7.0/css/font-awesome.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
     }
