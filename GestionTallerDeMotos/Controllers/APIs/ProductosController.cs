@@ -30,6 +30,17 @@ namespace GestionTallerDeMotos.Controllers.APIs
             });            
         }
 
+        [HttpGet]
+        public IHttpActionResult ObtenerProducto(int id)
+        {
+            var producto = _context.Productos.SingleOrDefault(p => p.Id == id);
+
+            if (producto == null)
+                return NotFound();
+
+            return Ok(Mapper.Map<Producto, ProductoDto>(producto));
+        }
+
         [HttpPost]
         public IHttpActionResult CrearProducto(ProductoDto productoDto)
         {

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -220,6 +221,7 @@
     <Compile Include="Controllers\APIs\CombustiblesController.cs" />
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
+    <Compile Include="Controllers\APIs\PresupuestosController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\APIs\ProductosController.cs" />
     <Compile Include="Controllers\APIs\ProveedoresController.cs" />
@@ -239,6 +241,7 @@
     <Compile Include="Dtos\CombustibleDto.cs" />
     <Compile Include="Dtos\MarcaDto.cs" />
     <Compile Include="Dtos\ModeloDto.cs" />
+    <Compile Include="Dtos\NuevoPresupuestoDto.cs" />
     <Compile Include="Dtos\PersoneriaDto.cs" />
     <Compile Include="Dtos\PresupuestoDetalleDto.cs" />
     <Compile Include="Dtos\PresupuestoDto.cs" />
@@ -317,13 +320,9 @@
     <Compile Include="Migrations\201708092115464_CreacionDeTablaPresupuestos.Designer.cs">
       <DependentUpon>201708092115464_CreacionDeTablaPresupuestos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708092147144_CreacionDeTablaPresupuestoDetalles.cs" />
-    <Compile Include="Migrations\201708092147144_CreacionDeTablaPresupuestoDetalles.Designer.cs">
-      <DependentUpon>201708092147144_CreacionDeTablaPresupuestoDetalles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708092210128_AgregarColumnaIdentityATablaPresupuestoDetalles.cs" />
-    <Compile Include="Migrations\201708092210128_AgregarColumnaIdentityATablaPresupuestoDetalles.Designer.cs">
-      <DependentUpon>201708092210128_AgregarColumnaIdentityATablaPresupuestoDetalles.cs</DependentUpon>
+    <Compile Include="Migrations\201708160304042_CreacionDeTablaPresupuestoDetalles.cs" />
+    <Compile Include="Migrations\201708160304042_CreacionDeTablaPresupuestoDetalles.Designer.cs">
+      <DependentUpon>201708160304042_CreacionDeTablaPresupuestoDetalles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -772,11 +771,8 @@
     <EmbeddedResource Include="Migrations\201708092115464_CreacionDeTablaPresupuestos.resx">
       <DependentUpon>201708092115464_CreacionDeTablaPresupuestos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708092147144_CreacionDeTablaPresupuestoDetalles.resx">
-      <DependentUpon>201708092147144_CreacionDeTablaPresupuestoDetalles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708092210128_AgregarColumnaIdentityATablaPresupuestoDetalles.resx">
-      <DependentUpon>201708092210128_AgregarColumnaIdentityATablaPresupuestoDetalles.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708160304042_CreacionDeTablaPresupuestoDetalles.resx">
+      <DependentUpon>201708160304042_CreacionDeTablaPresupuestoDetalles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

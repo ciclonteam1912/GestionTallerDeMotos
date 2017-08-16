@@ -13,7 +13,7 @@ namespace GestionTallerDeMotos.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201708092147144_CreacionDeTablaPresupuestoDetalles"; }
+            get { return "201708160304042_CreacionDeTablaPresupuestoDetalles"; }
         }
         
         string IMigrationMetadata.Source

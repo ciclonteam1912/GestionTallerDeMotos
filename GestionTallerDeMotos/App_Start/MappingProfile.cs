@@ -38,6 +38,8 @@ namespace GestionTallerDeMotos.App_Start
                 .ForMember(v => v.FechaDeIngreso, opt => opt.Ignore());
             Mapper.CreateMap<ProveedorDto, Proveedor>();
             Mapper.CreateMap<ProductoDto, Producto>();
+            Mapper.CreateMap<PresupuestoDto, Presupuesto>();
+            Mapper.CreateMap<PresupuestoDetalleDto, PresupuestoDetalle>();
         }
     }
 }

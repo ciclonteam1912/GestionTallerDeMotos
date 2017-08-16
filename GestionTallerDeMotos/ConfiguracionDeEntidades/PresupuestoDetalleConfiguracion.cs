@@ -1,5 +1,4 @@
 ﻿using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace GestionTallerDeMotos.ConfiguracionDeEntidades
@@ -10,11 +9,8 @@ namespace GestionTallerDeMotos.ConfiguracionDeEntidades
         {
             ToTable("PresupuestoDetalles");
 
-            HasKey(pd => new { pd.Id, pd.PresupuestoId, pd.ProductoId });
-
             Property(pd => pd.Id)
-                .HasColumnName("Codigo")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                .HasColumnName("Codigo");
 
             Property(pd => pd.PresupuestoId)
                 .HasColumnName("PresupuestoCodigo");

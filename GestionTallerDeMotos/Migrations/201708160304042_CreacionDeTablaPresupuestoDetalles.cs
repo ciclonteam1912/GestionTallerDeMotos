@@ -1,7 +1,8 @@
 namespace GestionTallerDeMotos.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class CreacionDeTablaPresupuestoDetalles : DbMigration
     {
         public override void Up()
@@ -10,7 +11,7 @@ namespace GestionTallerDeMotos.Migrations
                 "dbo.PresupuestoDetalles",
                 c => new
                     {
-                        Codigo = c.Int(nullable: false),
+                        Codigo = c.Int(nullable: false, identity: true),
                         PresupuestoCodigo = c.Int(nullable: false),
                         ProductoCodigo = c.Int(nullable: false),
                         Cantidad = c.Byte(nullable: false),
@@ -18,7 +19,7 @@ namespace GestionTallerDeMotos.Migrations
                         Iva = c.Int(nullable: false),
                         SubTotal = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Codigo, t.PresupuestoCodigo, t.ProductoCodigo })
+                .PrimaryKey(t => t.Codigo)
                 .ForeignKey("dbo.Presupuestos", t => t.PresupuestoCodigo, cascadeDelete: true)
                 .ForeignKey("dbo.Productos", t => t.ProductoCodigo, cascadeDelete: true)
                 .Index(t => t.PresupuestoCodigo)
