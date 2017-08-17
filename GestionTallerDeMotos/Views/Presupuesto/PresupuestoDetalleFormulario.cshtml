@@ -8,9 +8,23 @@
 
 <form id="presupuestoFormulario">
     <div class="form-group">
+        <label>Cliente</label>
+        <select id="clientes" class="form-control">
+            <option value="">Seleccione un Cliente...</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Vehículo</label>
+        <select id="vehiculo" class="form-control">
+            <option value="">Seleccione un Vehículo...</option>
+        </select>
+    </div>
+
+    @*<div class="form-group">
         <label>Vehículo</label>
         <input id="vehiculo" type="text" class="form-control" />
-    </div>
+    </div>*@
     <div class="form-group">
         <label>Fecha de Emisión</label>
         <input type="text" id="fechaEmision" class="form-control" />
@@ -105,6 +119,32 @@
             var subTotal = 0;
 
             $("thead").show();
+            //Obtener los clientes y agregarlos al Drop-down List.
+            $.ajax({
+                type: "GET",
+                url: "/api/clientes",
+                contentType: "application/json",
+                success: function (clientes) {
+                    $.each(clientes, function (i) {
+                        $("#clientes").append($('<option></option>').val(clientes[i].Id).html(clientes[i].Nombre + ' ' + clientes[i].Apellido));
+                    });
+                }
+            });
+
+            $("#clientes").change(function () {
+                //$("#vehiculo").empty();
+                $.ajax({
+                    type: "GET",
+                    url: "/api/vehiculos/ " + $("#clientes").val(),
+                    contentType: "application/json",
+                    success: function (vehiculos) {
+                        $.each(vehiculos, function (i) {
+                            $("#vehiculo").append($('<option></option>').val(vehiculos[i].Id).html(vehiculos[i].Matricula));
+                        })
+                    }
+                });
+            })
+
             //Obtener los productos o servicios y agregarlos al Drop-down List.
             $.ajax({
                 type: "GET",
@@ -188,7 +228,7 @@
             $("#finalizar").click(function () {
                 vm.Presupuesto = {
                     FechaEmision: $("#fechaEmision").val(),
-                    PresupuestoAceptado: $("#aceptado").val(),
+                    PresupuestoAceptado: $('#aceptado').is(":checked"),
                     VehiculoId: $("#vehiculo").val()
                 };
 

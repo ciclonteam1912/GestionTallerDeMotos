@@ -22,6 +22,17 @@ namespace GestionTallerDeMotos.Controllers.APIs
         }
 
         [HttpGet]
+        public IHttpActionResult ObtenerVehiculosPorCliente(int id)
+        {
+            var vehiculos = _context.Vehiculos
+                .Where(v => v.ClienteId == id)
+                .ToList()
+                .Select(Mapper.Map<Vehiculo, VehiculoDto>);
+
+            return Ok(vehiculos);
+        }
+
+        [HttpGet]
         public IHttpActionResult ObtenerVehiculos()
         {
             var vehiculos = _context.Vehiculos
