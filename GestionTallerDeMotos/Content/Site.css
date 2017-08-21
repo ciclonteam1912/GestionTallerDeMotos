@@ -27,11 +27,11 @@ textarea {
     max-width: 280px;
 }
 
-.field-validation-error, .validation-summary-errors {
+.field-validation-error, .validation-summary-errors, label.error {
     color: red;
 }
 
-.input-validation-error {
+.input-validation-error, select.form-control.error {
     border: 2px solid red;
 }
 

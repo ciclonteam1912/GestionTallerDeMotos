@@ -14,6 +14,9 @@ namespace GestionTallerDeMotos.ConfiguracionDeEntidades
 
             Property(p => p.VehiculoId)
                 .HasColumnName("VehiculoCodigo");
+
+            Property(p => p.EstadoId)
+                .HasColumnName("EstadoCodigo");
         }
     }
 }

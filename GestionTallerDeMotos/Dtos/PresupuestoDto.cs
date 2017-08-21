@@ -10,6 +10,8 @@ namespace GestionTallerDeMotos.Dtos
 
         public int VehiculoId { get; set; }
 
-        public bool PresupuestoAceptado { get; set; }
+        public int TotalPresupuesto { get; set; }
+
+        public byte EstadoId { get; set; }
     }
 }

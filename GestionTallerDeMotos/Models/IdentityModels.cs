@@ -34,6 +34,7 @@ namespace GestionTallerDeMotos.Models
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Presupuesto> Presupuestos { get; set; }
         public DbSet<PresupuestoDetalle> PresupuestoDetalles { get; set; }
+        public DbSet<Estado> Estados { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -56,6 +57,7 @@ namespace GestionTallerDeMotos.Models
             modelBuilder.Configurations.Add(new ProductoConfiguracion());
             modelBuilder.Configurations.Add(new PresupuestoConfiguracion());
             modelBuilder.Configurations.Add(new PresupuestoDetalleConfiguracion());
+            modelBuilder.Configurations.Add(new EstadoConfiguracion());
         }
 
         public static ApplicationDbContext Create()

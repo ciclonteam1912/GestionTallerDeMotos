@@ -4,92 +4,101 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hoja de Presupuesto</h2>
-
 <form id="presupuestoFormulario">
-    <div class="form-group">
-        <label>Cliente</label>
-        <select id="clientes" class="form-control">
-            <option value="">Seleccione un Cliente...</option>
-        </select>
+    <div class="row well">
+        <h2>Presupuesto</h2>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Cliente</label>
+                <select id="clientes" class="form-control" required name="clientes">
+                    <option value="">Seleccione un Cliente...</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Vehículo</label>
+                <select id="vehiculo" class="form-control" required name="vehiculo">
+                    <option value="">Seleccione un Vehículo...</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label style="display: block">Producto o Servicio</label>
+                <select id="productos" class="form-control" style="display: inline-block">
+                    <option value="">Seleccione un Producto o Servicio...</option>
+                </select>
+                <button class="btn btn-warning" id="btnProductos" type="button">Seleccionar</button>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select id="estado" class="form-control" required name="estado">
+                    <option value="">Seleccione un Estado...</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label>Vehículo</label>
-        <select id="vehiculo" class="form-control">
-            <option value="">Seleccione un Vehículo...</option>
-        </select>
-    </div>
+    <hr />
 
-    @*<div class="form-group">
-        <label>Vehículo</label>
-        <input id="vehiculo" type="text" class="form-control" />
-    </div>*@
-    <div class="form-group">
-        <label>Fecha de Emisión</label>
-        <input type="text" id="fechaEmision" class="form-control" />
+    <div class="row well">
+        <h2>Detalle del Presupuesto</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción del Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>IVA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" id="productoId" readonly class="form-control" /></td>
+                    <td><input type="text" id="productoDescripcion" readonly class="form-control" /></td>
+                    <td><input type="text" id="productoPrecio" readonly class="form-control" /></td>
+                    <td><input type="number" id="productoCantidad" class="form-control" required name="productoCantidad" /></td>
+                    <td><input type="number" id="productoIva" class="form-control" required name="productoIva" /></td>                    
+                    <td><button class="btn btn-primary" id="agregar">Agregar</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-        <label style="display: block">Producto o Servicio</label>
-        <select id="productos" class="form-control" style="display: inline-block">
-            <option value="">Seleccione un Producto o Servicio...</option>
-        </select>
-        <button class="btn btn-warning" id="btnProductos" type="button">Seleccionar</button>
+    
+    <div class="row well">
+        <table id="presupuestoDetalle" class="table">
+            <thead>
+                <tr>
+                    <td>Detalle del Presupuesto</td>
+                </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Descripción del Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" name="aceptado" id="aceptado"/> ¿Presupuesto aceptado?
-        </label>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Descripción del Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>               
-                <th>IVA</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="text" id="productoId" readonly class="form-control" /></td>
-                <td><input type="text" id="productoDescripcion" readonly class="form-control" /></td>
-                <td><input type="text" id="productoPrecio" readonly class="form-control" /></td>
-                <td><input type="number" id="productoCantidad" class="form-control" /></td>
-                <td><input type="number" id="productoIva" class="form-control" /></td>
-                <td><input type="button" name="agregar" id="agregar" value="Agregar" class="btn btn-primary"/></td>
-            </tr>
-        </tbody>
-    </table>
-    <table id="presupuestoDetalle" class="table">
-        <thead>
-            <tr>
-                <td>Detalle del Presupuesto</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <th>Descripción del Producto</th>               
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>IVA</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
     <div class="form-group">
         <label>Total a Pagar: </label>
         <input type="text" name="totalAPagar" id="totalAPagar" value="" readonly class="form-control" />
     </div>    
 
     <div class="form-group">
-        <input class="btn btn-success" type="button" id="finalizar" value="Guardar" />
-        <input class="btn btn-success" type="button" id="txtnueva" value="Nuevo" />
+        <button class="btn btn-success">Guardar</button>
     </div>    
 </form>
 
 @section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>     
         function probar() {
             $('#presupuestoDetalle tr.detalle').each(function (index, tr) {
@@ -109,7 +118,6 @@
                 Presupuesto: {},
                 PresupuestoDetalles: []
             }
-
 
             $("#productoCantidad").prop("disabled", true);
             $("#productoIva").prop("disabled", true);
@@ -131,18 +139,35 @@
                 }
             });
 
+
+            //Obtener los Estados y agregarlos al Drop-down List.
+            $.ajax({
+                type: "GET",
+                url: "/api/estados",
+                success: function (estados) {
+                    $.each(estados, function (i) {
+                        $("#estado").append($('<option></option>').val(estados[i].Id).html(estados[i].Descripcion));
+                    });
+                }
+            });
+
+            //Cascading Drop-down list.
             $("#clientes").change(function () {
-                //$("#vehiculo").empty();
-                $.ajax({
-                    type: "GET",
-                    url: "/api/vehiculos/ " + $("#clientes").val(),
-                    contentType: "application/json",
-                    success: function (vehiculos) {
-                        $.each(vehiculos, function (i) {
-                            $("#vehiculo").append($('<option></option>').val(vehiculos[i].Id).html(vehiculos[i].Matricula));
-                        })
-                    }
-                });
+                $("#vehiculo").empty();
+                $("#vehiculo").append($('<option></option>').val("").html('Seleccione un Vehículo...'));
+                if ($("#clientes").val() != "") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/vehiculos/ " + $("#clientes").val(),
+                        contentType: "application/json",
+                        success: function (vehiculos) {
+                            $.each(vehiculos, function (i) {
+                                $("#vehiculo").append($('<option></option>').val(vehiculos[i].Id).html(vehiculos[i].Matricula));
+                            })
+                        }
+                    });
+                }                
+                return false;
             })
 
             //Obtener los productos o servicios y agregarlos al Drop-down List.
@@ -179,7 +204,7 @@
             });
 
 
-            $("#agregar").click(function () {
+            $("#agregar").click(function () {  
                 $("#productoCantidad").prop("disabled", true);
                 $("#productoIva").prop("disabled", true);
                 $("#agregar").prop("disabled", true);
@@ -188,19 +213,31 @@
                 var productoDescripcion = $("#productoDescripcion").val();
                 var productoPrecio = $("#productoPrecio").val();
                 var productoCantidad = $("#productoCantidad").val();
+                var cantidad = productoCantidad != "" ? productoCantidad : 1;
+                
                 var productoIva = $("#productoIva").val();
-                total = (productoPrecio * productoCantidad) - (((productoPrecio * productoCantidad) * productoIva) / 100);
+                
+                if (productoIva != "") {
+                    total = (productoPrecio * cantidad) + (((productoPrecio * cantidad) * productoIva) / 100);
+                    productoIva = ((productoPrecio * cantidad) * productoIva) / 100;
+                }                    
+                else{
+                    productoIva = 0;
+                    total = productoPrecio * cantidad;
+                 }
+                    
+
                 subTotal = subTotal + total;
                 $("#totalAPagar").val(subTotal);
                 var presupuesto = '<tr class="detalle">' +
                     '<td>' + productoId + '</td>' +
                     '<td>' + productoDescripcion + '</td>' +
                     '<td>' + productoPrecio + '</td>' +
-                    '<td>' + productoCantidad + '</td>' +
+                    '<td>' + cantidad + '</td>' +
                     '<td>' + productoIva + '</td>' +
                     '<td>' + total + '</td>' +
                     '<td class="eliminar-fila"><button id="eliminar" class="btn btn-danger eliminar" type="button"><span class="fa fa-remove"></span></button></td>' +
-                    '</tr>';                
+                    '</tr>';
 
                 $("#presupuestoDetalle tbody").append(presupuesto);
 
@@ -225,44 +262,65 @@
                 probar();
             });  
 
-            $("#finalizar").click(function () {
-                vm.Presupuesto = {
-                    FechaEmision: $("#fechaEmision").val(),
-                    PresupuestoAceptado: $('#aceptado').is(":checked"),
-                    VehiculoId: $("#vehiculo").val()
-                };
 
-                $('#presupuestoDetalle tr.detalle').each(function (index, tr) {
+            //Agregar validación al formulario al hacer submit.
+            var validator = $("#presupuestoFormulario").validate({
+
+                submitHandler: function () {
                     
-                    var lines = $('td', tr).map(function (index, td) {
-                        //console.log(td);
-                        if (index != 6 && index != 1)                            
-                            return $(td).text();
+                    vm.Presupuesto = {                        
+                        VehiculoId: $("#vehiculo").val(),
+                        TotalPresupuesto: $("#totalAPagar").val(),
+                        EstadoId: $("#estado").val()
+                    };
+
+                    $('#presupuestoDetalle tr.detalle').each(function (index, tr) {
+
+                        var lines = $('td', tr).map(function (index, td) {
+                            
+                            if (index != 6 && index != 1)
+                                return $(td).text();
+                        });
+
+                        vm.PresupuestoDetalles.push({
+                            ProductoId: lines[0],
+                            Precio: lines[1],
+                            Cantidad: lines[2],
+                            Iva: lines[3],
+                            SubTotal: lines[4]
+                        });
+                        
                     });
 
-                    vm.PresupuestoDetalles.push({
-                        ProductoId: lines[0],
-                        Precio: lines[1],
-                        Cantidad: lines[2],
-                        Iva: lines[3],
-                        SubTotal: lines[4]
-                    });
-                    //console.log(lines);
-                });
+                    $.ajax({
+                        url: "/api/presupuestos",
+                        method: "post",
+                        data: vm
+                    })
+                        .done(function () {
+                            toastr.success("Hoja de Presupuesto creada con éxito.");                            
+                            $("#estado").val("");
+                            $("#productos").val("");
+                            $("#vehiculo").val("");
+                            $("#clientes").val("");
+                            $("#presupuestoDetalle tbody").empty();
+                            $("#totalAPagar").val("");
+                            subTotal = 0;
 
-                $.ajax({
-                    url: "/api/presupuestos",
-                    method: "post",
-                    data: vm
-                })
-                .done(function () {
-                    toastr.success("Hoja de Presupuesto creada con éxito.");
-                })
-                .fail(function () {
-                    toastr.error("Algo inesperado ha ocurrido.");
-                });
+                            vm = {
+                                Presupuesto: {},
+                                PresupuestoDetalles: []
+                            }
 
-                console.log(vm);
+                            validator.resetForm();
+                        })
+                        .fail(function () {
+                            toastr.error("Algo inesperado ha ocurrido.");
+                        });
+
+                    console.log(vm);
+                    return false;
+                }
             });
 
             toastr.options = {

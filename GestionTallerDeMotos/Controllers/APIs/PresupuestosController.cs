@@ -2,6 +2,7 @@
 using GestionTallerDeMotos.Dtos;
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
+using System;
 using System.Web.Http;
 
 namespace GestionTallerDeMotos.Controllers.APIs
@@ -20,9 +21,10 @@ namespace GestionTallerDeMotos.Controllers.APIs
         {
             var presupuestoDto = new PresupuestoDto
             {
-                FechaEmision = nuevoPresupuestoDto.Presupuesto.FechaEmision,
+                FechaEmision = DateTime.Now,
                 VehiculoId = nuevoPresupuestoDto.Presupuesto.VehiculoId,
-                PresupuestoAceptado = nuevoPresupuestoDto.Presupuesto.PresupuestoAceptado
+                TotalPresupuesto = nuevoPresupuestoDto.Presupuesto.TotalPresupuesto,
+                EstadoId = nuevoPresupuestoDto.Presupuesto.EstadoId
             };
 
             var presupuesto = Mapper.Map<PresupuestoDto, Presupuesto>(presupuestoDto);

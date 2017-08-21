@@ -12,6 +12,10 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
 
         public int VehiculoId { get; set; }
 
-        public bool PresupuestoAceptado { get; set; }
+        public int TotalPresupuesto { get; set; }
+
+        public Estado Estado { get; set; }
+
+        public byte EstadoId { get; set; }
     }
 }
