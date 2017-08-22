@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Tipo de Documento</th>
@@ -28,6 +29,7 @@
         <tbody></tbody>
         <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
@@ -74,6 +76,8 @@
             $("thead").show();
             $("tfoot").show();
 
+            
+
             $('#clientes tfoot th').each(function () {
                 var title = $(this).text();
                 if (title != "")
@@ -115,7 +119,14 @@
                         data: "Id",
                         render: function (data) {
                             return "<a href='/Cliente/EditarCliente/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        },
+                        }
+                    },
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-cliente-id=" + data + "></a>";
+                        }
                     },
                     {
                         data: "Nombre"
@@ -135,6 +146,38 @@
                 ]
             });
 
+            //Evento click al eliminar un cliente
+            $("#clientes").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar este cliente?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/clientes/" + button.attr("data-cliente-id"),
+                                method: "DELETE"
+                            })
+                            .done(function () {
+                                table.row(button.parents("tr")).remove().draw();
+                                toastr.success("Cliente eliminado con éxito.");
+                            })
+                            .fail(function () {
+                                toastr.error("No se puedo eliminar el cliente.");
+                            });
+                        }
+                    }
+                });
+            });
+
             // Apply the search
             table.columns().every(function () {
                 var that = this;
@@ -147,6 +190,18 @@
                     }
                 });
             });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         })
     </script>    
 }

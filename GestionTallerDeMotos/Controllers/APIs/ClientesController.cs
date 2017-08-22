@@ -28,5 +28,15 @@ namespace GestionTallerDeMotos.Controllers.APIs
 
             return Ok(clientes);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarCliente(int id)
+        {
+            var cliente = _context.Clientes.Single(c => c.Id == id);
+            _context.Clientes.Remove(cliente);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
