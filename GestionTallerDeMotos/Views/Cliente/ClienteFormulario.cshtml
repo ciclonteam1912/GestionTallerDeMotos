@@ -21,25 +21,25 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         @Html.LabelFor(m => m.PersoneriaId)
-                        @Html.DropDownListFor(m => m.PersoneriaId, new SelectList(Model.Personerias, "Id", "Descripcion"), "Seleccionar Personería", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.PersoneriaId, new SelectList(Model.Personerias, "Id", "Descripcion"), "Seleccionar Personería", new { @class = "form-control", id = "personeriaId" })
                         @Html.ValidationMessageFor(m => m.PersoneriaId)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Nombre)
-                        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese Nombre del Cliente..." })
+                        @Html.LabelFor(m => m.Nombre, new { id = "labelNombre"})
+                        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Nombre del Cliente...", id = "inputNombre" })
                         @Html.ValidationMessageFor(m => m.Nombre)
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="apellido">
                         @Html.LabelFor(m => m.Apellido)
-                        @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", placeholder = "Ingrese Apellido del Cliente..." })
+                        @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", placeholder = "Apellido del Cliente..." })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.CorreoElectronico)
-                        @Html.TextBoxFor(m => m.CorreoElectronico, new { @class = "form-control", placeholder = "Ingrese Correo Electrónico del Cliente..." })
+                        @Html.TextBoxFor(m => m.CorreoElectronico, new { @class = "form-control", placeholder = "Correo Electrónico..." })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Telefono)
-                        @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Ingrese Número de Teléfono del Cliente..." })
+                        @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Número de Teléfono..." })
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -50,20 +50,20 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.ValorDocumento)
-                        @Html.TextBoxFor(m => m.ValorDocumento, new { @class = "form-control", placeholder = "Ingrese el Valor del Documento del Cliente..." })
+                        @Html.TextBoxFor(m => m.ValorDocumento, new { @class = "form-control", placeholder = "Ingrese el Valor del Documento..." })
                         @Html.ValidationMessageFor(m => m.ValorDocumento)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Direccion)
-                        @Html.TextAreaFor(m => m.Direccion, new { @class = "form-control", placeholder = "Ingrese Dirección del Cliente..." })
+                        @Html.TextAreaFor(m => m.Direccion, new { @class = "form-control", placeholder = "Dirección..." })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.FechaDeNacimiento)
-                        @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control", placeholder = "Ingrese Fecha de Nacimiento del Cliente..." })
+                        @Html.LabelFor(m => m.FechaDeNacimiento, new { id = "labelFecha"})
+                        @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control", placeholder = "Fecha de Nacimiento...", id = "inputFecha" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.NombrePropietario)
-                        @Html.TextBoxFor(m => m.NombrePropietario, new { @class = "form-control", placeholder = "Ingrese Nombre del Propietario del Cliente..." })
+                        @Html.TextBoxFor(m => m.NombrePropietario, new { @class = "form-control", placeholder = "Nombre del Propietario..." })
                     </div>
                     @Html.HiddenFor(m => m.Id)
                     @Html.AntiForgeryToken()
@@ -89,6 +89,8 @@
         });
 
         $(document).ready(function () {
+            var personeriaId = $("#personeriaId").val();
+
             $(".menu li:has(ul)").click(function (e) {
                 e.preventDefault();
 
@@ -106,6 +108,30 @@
             $(".menu li ul li a").click(function () {
                 window.location.href = $(this).attr('href');
             });
+
+            CambiarFormulario(personeriaId);
+
+            $("#personeriaId").change(function () {
+                CambiarFormulario($(this).val());
+            });
+
+            function CambiarFormulario(id) {
+                var personeriaId = id;
+                console.log(personeriaId);
+                if (personeriaId == 4) {
+                    $("#apellido").hide();
+                    $("#labelFecha").text("Fecha de Fundación");
+                    $("#inputFecha").attr("placeholder", "Fecha de Fundación...");
+                    $("#labelNombre").text("Institución o Empresa");
+                    $("#inputNombre").attr("placeholder", "Nombre de la Institución o Empresa...");
+                } else {
+                    $("#apellido").show();
+                    $("#labelFecha").text("Fecha de Nacimiento");
+                    $("#inputFecha").attr("placeholder", "Fecha de Nacimiento...");
+                    $("#labelNombre").text("Nombre");
+                    $("#inputNombre").attr("placeholder", "Nombre del Cliente...");
+                }
+            }
         });
     </script>    
 }
