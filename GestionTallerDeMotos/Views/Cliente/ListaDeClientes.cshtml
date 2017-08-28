@@ -76,7 +76,7 @@
             $("thead").show();
             $("tfoot").show();
 
-            
+
 
             $('#clientes tfoot th').each(function () {
                 var title = $(this).text();
@@ -166,13 +166,13 @@
                                 url: "/api/clientes/" + button.attr("data-cliente-id"),
                                 method: "DELETE"
                             })
-                            .done(function () {
-                                table.row(button.parents("tr")).remove().draw();
-                                toastr.success("Cliente eliminado con éxito.");
-                            })
-                            .fail(function () {
-                                toastr.error("No se puedo eliminar el cliente.");
-                            });
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Cliente eliminado con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se puedo eliminar el cliente.");
+                                });
                         }
                     }
                 });
@@ -202,6 +202,6 @@
                 "timeOut": 5000,
                 "extendedTimeOut": 1000
             }
-        })
+        });
     </script>    
 }

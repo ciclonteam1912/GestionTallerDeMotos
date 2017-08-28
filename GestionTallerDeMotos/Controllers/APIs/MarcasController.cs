@@ -23,6 +23,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpGet]
         public IHttpActionResult ObtenerMarcas()
         {
+            _context.Configuration.ProxyCreationEnabled = false;
             var marcas = _context.Marcas.ToList().Select(Mapper.Map<Marca, MarcaDto>);
 
             return Ok(marcas);
@@ -45,6 +46,17 @@ namespace GestionTallerDeMotos.Controllers.APIs
             var resultado = Mapper.Map<Marca, MarcaDto>(marca);
 
             return Ok(resultado);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarMarca(int id)
+        {
+            var marca = _context.Marcas.Single(m => m.Id == id);
+
+            _context.Marcas.Remove(marca);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

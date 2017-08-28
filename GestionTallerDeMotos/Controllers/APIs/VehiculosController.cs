@@ -24,6 +24,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpGet]
         public IHttpActionResult ObtenerVehiculosPorCliente(int id)
         {
+            _context.Configuration.ProxyCreationEnabled = false;
             var vehiculos = _context.Vehiculos
                 .Where(v => v.ClienteId == id)
                 .ToList()
@@ -35,6 +36,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpGet]
         public IHttpActionResult ObtenerVehiculos()
         {
+            _context.Configuration.ProxyCreationEnabled = false;
             var vehiculos = _context.Vehiculos
                 .Include(v => v.Cliente)
                 .Include(v => v.Aseguradora)
@@ -59,6 +61,16 @@ namespace GestionTallerDeMotos.Controllers.APIs
             var resultado = Mapper.Map<Vehiculo, VehiculoDto>(vehiculo);
 
             return Ok(resultado);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarVehiculo(int id)
+        {
+            var vehiculo = _context.Vehiculos.Single(c => c.Id == id);
+            _context.Vehiculos.Remove(vehiculo);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

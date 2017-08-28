@@ -45,5 +45,16 @@ namespace GestionTallerDeMotos.Controllers.APIs
             var resultado = Mapper.Map<Modelo, ModeloDto>(modelo);
             return Ok(resultado);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarModelo(int id)
+        {
+            var modelo = _context.Modelos.Single(m => m.Id == id);
+
+            _context.Modelos.Remove(modelo);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
         [HttpGet]
         public IHttpActionResult ObtenerClientes()
         {
+            _context.Configuration.ProxyCreationEnabled = false;
             var clientes = _context.Clientes
                 .Include(c => c.Personeria)
                 .Include(c => c.TipoDocumento)

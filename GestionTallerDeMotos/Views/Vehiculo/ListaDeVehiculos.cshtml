@@ -8,16 +8,17 @@
 
 <div id="contenido">
     <i class="fa fa-bars menu-bar"></i>
-    <h2>Lista De Vehiculos</h2>
+    <h2>Lista De Vehículos</h2>
 
 
     <p>
-        @Html.ActionLink("Nuevo Vehiculo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Nuevo Vehículo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
     </p>
 
     <table id="vehiculos" class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Matrícula</th>
@@ -31,6 +32,7 @@
         <tbody></tbody>
         <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Matrícula</th>
@@ -124,6 +126,13 @@
                         },
                     },
                     {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-vehiculo-id=" + data + "></a>";
+                        }
+                    },
+                    {
                         data: "Id"
                     },
                     {
@@ -150,6 +159,38 @@
                 ]
             });
 
+            //Evento click al eliminar un vehículo
+            $("#vehiculos").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar este vehículo?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/vehiculos/" + button.attr("data-vehiculo-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Vehículo eliminado con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se puedo eliminar el vehículo.");
+                                });
+                        }
+                    }
+                });
+            });
+
             // Apply the search
             table.columns().every(function () {
                 var that = this;
@@ -162,6 +203,18 @@
                     }
                 });
             });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         });
     </script>
 }

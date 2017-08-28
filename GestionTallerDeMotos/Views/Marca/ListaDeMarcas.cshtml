@@ -14,9 +14,10 @@
         @Html.ActionLink("Nueva Marca", "NuevaMarca", "Marca", new { @class = "btn btn-primary" })
     </p>
 
-    <table id="marcas" class="table table-bordered table-hover">
+    <table id="marcas" class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
@@ -25,6 +26,7 @@
         <tbody></tbody>
         <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
@@ -107,7 +109,14 @@
                         data: "Id",
                         render: function (data) {
                             return "<a href='/Marca/EditarMarca/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        },
+                        }
+                    },
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-marca-id=" + data + "></a>";
+                        }
                     },
                     {
                         data: "Id"
@@ -116,6 +125,38 @@
                         data: "Nombre"
                     }
                 ]
+            });
+
+            //Evento click al eliminar una marca
+            $("#marcas").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar esta marca?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/marcas/" + button.attr("data-marca-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Marca eliminada con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se puedo eliminar la marca.");
+                                });
+                        }
+                    }
+                });
             });
 
             // Apply the search
@@ -130,6 +171,18 @@
                     }
                 });
             });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         });
     </script>    
 }
