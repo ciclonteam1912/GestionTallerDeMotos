@@ -133,3 +133,12 @@ i.fa {
 .abrir {
     transform: translateX(250px);
 }
+
+
+.dataTables_filter{
+    display: none;
+}
+
+div.dt-buttons{
+    float: right;
+}

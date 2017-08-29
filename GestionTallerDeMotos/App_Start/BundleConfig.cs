@@ -13,6 +13,13 @@ namespace GestionTallerDeMotos
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
+                        "~/Scripts/DataTables/dataTables.tableTools.js",
+                        "~/Scripts/DataTables/buttons.html5.js",
+                        "~/Scripts/DataTables/dataTables.buttons.js",
+                        "~/Scripts/DataTables/buttons.flash.js",
+                        "~/Scripts/DataTables/buttons.print.js",                        
+                        "~/Scripts/pdfmake.js",
+                        "~/Scripts/vfs_fonts.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/DataTables/dataTables.bootstrap.js"));
 
@@ -26,7 +33,10 @@ namespace GestionTallerDeMotos
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/DataTables/css/buttons.dataTables.css",
+                      "~/Content/DataTables/css/dataTables.tableTools.css",
                       "~/Content/FontAwesome-4.7.0/css/font-awesome.css",
                       "~/Content/toastr.css",
                       "~/Content/site.css"));

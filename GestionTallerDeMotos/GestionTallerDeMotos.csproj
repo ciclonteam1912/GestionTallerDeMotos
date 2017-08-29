@@ -521,13 +521,28 @@
     <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\select.semanticui.css" />
     <Content Include="Content\DataTables\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\images\background.png" />
+    <Content Include="Content\DataTables\images\collection.png" />
+    <Content Include="Content\DataTables\images\collection_hover.png" />
+    <Content Include="Content\DataTables\images\copy.png" />
+    <Content Include="Content\DataTables\images\copy_hover.png" />
+    <Content Include="Content\DataTables\images\csv.png" />
+    <Content Include="Content\DataTables\images\csv_hover.png" />
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\pdf.png" />
+    <Content Include="Content\DataTables\images\pdf_hover.png" />
+    <Content Include="Content\DataTables\images\print.png" />
+    <Content Include="Content\DataTables\images\print_hover.png" />
     <Content Include="Content\DataTables\images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
     <Content Include="Content\DataTables\images\sort_both.png" />
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\images\xls.png" />
+    <Content Include="Content\DataTables\images\xls_hover.png" />
+    <Content Include="Content\DataTables\swf\copy_csv_xls.swf" />
+    <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\FontAwesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\FontAwesome-4.7.0\css\font-awesome.min.css" />
@@ -586,6 +601,11 @@
     <Content Include="Content\FontAwesome-4.7.0\scss\_variables.scss" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Content\DataTables\css\dataTables.tableTools.css" />
+    <Content Include="Content\DataTables\images\collection.psd" />
+    <Content Include="Content\DataTables\images\copy document.psd" />
+    <Content Include="Content\DataTables\images\file_types.psd" />
+    <Content Include="Content\DataTables\images\printer.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -637,6 +657,7 @@
     <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
     <Content Include="Scripts\DataTables\dataTables.material.js" />
     <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\pdfmake.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
     <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
@@ -649,6 +670,7 @@
     <Content Include="Scripts\DataTables\dataTables.select.min.js" />
     <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
     <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.tableTools.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
@@ -675,6 +697,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

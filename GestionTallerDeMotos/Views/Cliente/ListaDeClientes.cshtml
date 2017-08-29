@@ -14,7 +14,7 @@
         @Html.ActionLink("Nuevo Cliente", "NuevoCliente", "Cliente", new { @class = "btn btn-primary" })
     </p>
 
-    <table id="clientes" class="table table-bordered table-hover">
+    <table id="clientes" class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
                 <th></th>
@@ -85,6 +85,15 @@
             });
 
             var table = $("#clientes").DataTable({
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        text: 'Generar Listado',
+                        extend: 'pdfHtml5',
+                        download: 'open'
+                    }
+                ],
+                "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
@@ -145,6 +154,22 @@
                     }
                 ]
             });
+
+            //new $.fn.dataTable.Buttons(table, {
+            //    buttons: [
+            //        {
+            //            extend: 'collection',
+            //            text: 'Flag',
+            //            buttons: [
+            //                {
+            //                    extend: 'pdfHtml5',
+            //                    download: 'open'
+            //                }
+            //            ],
+            //            fade: true
+            //        }
+            //    ]
+            //});
 
             //Evento click al eliminar un cliente
             $("#clientes").on("click", ".js-eliminar", function () {
