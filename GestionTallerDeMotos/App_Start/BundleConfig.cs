@@ -21,7 +21,8 @@ namespace GestionTallerDeMotos
                         "~/Scripts/pdfmake.js",
                         "~/Scripts/vfs_fonts.js",
                         "~/Scripts/toastr.js",
-                        "~/Scripts/DataTables/dataTables.bootstrap.js"));
+                        "~/Scripts/DataTables/dataTables.bootstrap.js",
+                        "~/Scripts/DataTables/buttons.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -36,6 +37,7 @@ namespace GestionTallerDeMotos
                       "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/DataTables/css/buttons.dataTables.css",
+                      "~/Content/DataTables/css/buttons.bootstrap.css",
                       "~/Content/DataTables/css/dataTables.tableTools.css",
                       "~/Content/FontAwesome-4.7.0/css/font-awesome.css",
                       "~/Content/toastr.css",
