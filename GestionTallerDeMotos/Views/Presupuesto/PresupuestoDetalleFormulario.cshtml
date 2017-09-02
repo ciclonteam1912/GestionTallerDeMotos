@@ -4,98 +4,100 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form id="presupuestoFormulario">
-    <div class="row well">
-        <h2>Presupuesto</h2>
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label>Cliente</label>
-                <select id="clientes" class="form-control" required name="clientes">
-                    <option value="">Seleccione un Cliente...</option>
-                </select>
+<div class="col-lg-10">
+    <form id="presupuestoFormulario">
+        <div class="row well">
+            <h2>Presupuesto</h2>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <select id="clientes" class="form-control" required name="clientes">
+                        <option value="">Seleccione un Cliente...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Vehículo</label>
+                    <select id="vehiculo" class="form-control" required name="vehiculo">
+                        <option value="">Seleccione un Vehículo...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label style="display: block">Producto o Servicio</label>
+                    <select id="productos" class="form-control" style="display: inline-block">
+                        <option value="">Seleccione un Producto o Servicio...</option>
+                    </select>
+                    <button class="btn btn-warning" id="btnProductos" type="button">Seleccionar</button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="estado" class="form-control" required name="estado">
+                        <option value="">Seleccione un Estado...</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label>Vehículo</label>
-                <select id="vehiculo" class="form-control" required name="vehiculo">
-                    <option value="">Seleccione un Vehículo...</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label style="display: block">Producto o Servicio</label>
-                <select id="productos" class="form-control" style="display: inline-block">
-                    <option value="">Seleccione un Producto o Servicio...</option>
-                </select>
-                <button class="btn btn-warning" id="btnProductos" type="button">Seleccionar</button>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label>Estado</label>
-                <select id="estado" class="form-control" required name="estado">
-                    <option value="">Seleccione un Estado...</option>
-                </select>
-            </div>
-        </div>
-    </div>
 
-    <hr />
+        <hr />
 
-    <div class="row well">
-        <h2>Detalle del Presupuesto</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descripción del Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>IVA</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" id="productoId" readonly class="form-control" /></td>
-                    <td><input type="text" id="productoDescripcion" readonly class="form-control" /></td>
-                    <td><input type="text" id="productoPrecio" readonly class="form-control" /></td>
-                    <td><input type="number" id="productoCantidad" class="form-control" required name="productoCantidad" /></td>
-                    <td><input type="number" id="productoIva" class="form-control" required name="productoIva" /></td>                    
-                    <td><button class="btn btn-primary" id="agregar">Agregar</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="row well">
-        <table id="presupuestoDetalle" class="table">
-            <thead>
-                <tr>
-                    <td>Detalle del Presupuesto</td>
-                </tr>
-                <tr>
-                    <th>Id</th>
-                    <th>Descripción del Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>IVA</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="form-group">
-        <label>Total a Pagar: </label>
-        <input type="text" name="totalAPagar" id="totalAPagar" value="" readonly class="form-control" />
-    </div>    
+        <div class="row well">
+            <h2>Detalle del Presupuesto</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción del Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>IVA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" id="productoId" readonly class="form-control" /></td>
+                        <td><input type="text" id="productoDescripcion" readonly class="form-control" /></td>
+                        <td><input type="text" id="productoPrecio" readonly class="form-control" /></td>
+                        <td><input type="number" id="productoCantidad" class="form-control" required name="productoCantidad" /></td>
+                        <td><input type="number" id="productoIva" class="form-control" required name="productoIva" /></td>
+                        <td><button class="btn btn-primary" id="agregar">Agregar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="form-group">
-        <button class="btn btn-success">Guardar</button>
-    </div>    
-</form>
+        <div class="row well">
+            <table id="presupuestoDetalle" class="table">
+                <thead>
+                    <tr>
+                        <td>Detalle del Presupuesto</td>
+                    </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripción del Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>IVA</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <label>Total a Pagar: </label>
+            <input type="text" name="totalAPagar" id="totalAPagar" value="" readonly class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success">Guardar</button>
+        </div>
+    </form>
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -113,7 +115,7 @@
         }
 
         $(document).ready(function () {
-
+            $("#menuVentas").addClass('active');
             var vm = {
                 Presupuesto: {},
                 PresupuestoDetalles: []

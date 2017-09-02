@@ -1,15 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Lista De Vehiculos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_MenuVertical")
-
-<div id="contenido">
-    <i class="fa fa-bars menu-bar"></i>
+<div class="col-lg-10" id="contenido">
     <h2>Lista De Vehículos</h2>
-
 
     <p>
         @Html.ActionLink("Nuevo Vehículo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
@@ -49,34 +44,8 @@
 
 @section Scripts{
     <script>
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("contenido").style.marginLeft = "0";
-        }
-
-        $(".menu-bar").click(function () {
-            $(".contenedor-menu").width("250px");
-        });
-
         $(document).ready(function () {
-            $(".menu li:has(ul)").click(function (e) {
-                e.preventDefault();
-
-                if ($(this).hasClass('activado')) {
-                    $(this).removeClass('activado');
-                    $(this).children('ul').slideUp();
-                } else {
-                    $(".menu li ul").slideUp();
-                    $(".menu li").removeClass('activado');
-                    $(this).addClass('activado');
-                    $(this).children('ul').slideDown();
-                }
-            });
-
-            $(".menu li ul li a").click(function () {
-                window.location.href = $(this).attr('href');
-            });
-
+            $("#menuTaller").addClass('active');
 
             $("thead").show();
             $("tfoot").show();
