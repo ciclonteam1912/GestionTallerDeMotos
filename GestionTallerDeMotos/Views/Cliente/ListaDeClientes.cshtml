@@ -4,10 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_MenuVertical")
-
-<div id="contenido">
-    <i class="fa fa-bars menu-bar"></i>
+<div class="col-lg-10" id="contenido">
     <h2>Lista De Clientes</h2>
 
     <p>
@@ -38,45 +35,16 @@
                 <th>Personería</th>
             </tr>
         </tfoot>
-    </table>
-
+        </table>
 </div>
-
 
 @section Scripts{
     <script>
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("contenido").style.marginLeft = "0";
-        }
-
-        $(".menu-bar").click(function () {
-            $(".contenedor-menu").width("250px");
-        });
-
         $(document).ready(function () {
-            $(".menu li:has(ul)").click(function (e) {
-                e.preventDefault();
-
-                if ($(this).hasClass('activado')) {
-                    $(this).removeClass('activado');
-                    $(this).children('ul').slideUp();
-                } else {
-                    $(".menu li ul").slideUp();
-                    $(".menu li").removeClass('activado');
-                    $(this).addClass('activado');
-                    $(this).children('ul').slideDown();
-                }
-            });
-
-            $(".menu li ul li a").click(function () {
-                window.location.href = $(this).attr('href');
-            });
-
+            $("#menuTaller").addClass('active');
+            $("#menuCliente").addClass('active');
             $("thead").show();
             $("tfoot").show();
-
-
 
             $('#clientes tfoot th').each(function () {
                 var title = $(this).text();
@@ -167,22 +135,6 @@
                     }
                 ]
             });
-
-            //new $.fn.dataTable.Buttons(table, {
-            //    buttons: [
-            //        {
-            //            extend: 'collection',
-            //            text: 'Flag',
-            //            buttons: [
-            //                {
-            //                    extend: 'pdfHtml5',
-            //                    download: 'open'
-            //                }
-            //            ],
-            //            fade: true
-            //        }
-            //    ]
-            //});
 
             //Evento click al eliminar un cliente
             $("#clientes").on("click", ".js-eliminar", function () {

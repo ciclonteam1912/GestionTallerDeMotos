@@ -35,105 +35,14 @@ textarea {
     border: 2px solid red;
 }
 
+footer{
+    float: right;
+}
 
 /****************** MENU VERTICAL ********************/
 #contenido h2 {
     text-align: center;
 }
-
-i.fa {
-    font-size: 30px;
-    float: left;
-    cursor: pointer;
-}
-
-.contenedor-menu {
-    position: fixed;
-    left: 0;
-    overflow-x: hidden;
-    height: 100%;
-    z-index: 1;
-    /*display: inline-block;*/
-    line-height: 30px;
-    background-color: #e9e9e9;
-    width: 0;
-    transition: 0.5s;
-}
-
-.contenedor-menu .closebtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 36px;
-    margin-left: 50px;
-    color: #999999;
-}
-
-.contenedor-menu h3 {
-    padding: 10px;
-    background: #222222;
-    margin: 0;
-    color: #999999;
-}
-
-.contenedor-menu li {
-    border: 1px solid #222222;
-    transition-property: border;
-    transition-duration: 0.3s;
-}
-
-.contenedor-menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-.contenedor-menu .menu li a {
-    display : block;
-    padding: 5px 10px;
-    background: #e9e9e9;
-}
-
-.contenedor-menu .menu li a:hover {
-    background: #1a95d5;
-    text-decoration: none;
-    color: white;
-    border-left: 5px solid #e9e9e9;
-}
-
-.contenedor-menu .menu .icono {
-    font-size: 12px;
-    line-height: 18px;
-    padding-top: 5px;
-}
-
-.contenedor-menu .menu .icono.izquierda {
-    float: left;
-    margin-right: 10px;
-}
-
-.contenedor-menu .menu .icono.derecha {
-    float: right;
-    margin-left: 10px;
-}
-
-.contenedor-menu .menu ul {
-    display: none;
-}
-
-.contenedor-menu .menu ul li a {
-    background: #424242;
-    color: #e9e9e9;
-}
-
-.contenedor-menu .menu .activado > a {
-    background: #1a95d5;
-    color: white;
-}
-
-.abrir {
-    transform: translateX(250px);
-}
-
 
 .dataTables_filter{
     display: none;
@@ -149,4 +58,74 @@ div.dt-buttons{
 
 .modulo {
     cursor: pointer;
+}
+
+
+/*------------- MENÚ PRINCIPAL------------------*/
+.menu-principal {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #e9e9e9;
+}
+
+.menu-principal h3 {
+    padding: 10px;
+    background: #222222;
+    margin: 0;
+    color: #999999;
+    text-align:center;
+}
+
+.menu-principal li a {
+    display: block;
+    padding: 5px 10px;
+    background: #e9e9e9;
+    font-size: 18px;
+}
+
+.menu-principal li a:hover {
+    background: #1a95d5;
+    color: white;
+    border-left: 5px solid #222222;
+}
+
+.menu-principal ul li ul li a {
+    background: #222222;
+    color: #999999;
+    margin-left: 0;
+    padding-left: 30px;
+}
+
+.menu-principal .submenu li a {
+    padding-left: 60px;
+}
+
+.menu-principal .menu .activado > a {
+    background: #428bca;
+    color: white;
+}
+
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #428bca !important;
+    color: white;
+}
+
+.menu-principal .icono {
+    font-size: 20px;
+    padding-top: 2px;
+    line-height: 18px;
+}
+
+.menu-principal .icono.izquierda {
+    margin-right: 10px;
+    float: left;
+}
+
+.menu-principal .icono.derecha {
+    margin-left: 10px;
+    float: right;
+    font-size: 15px;
 }
