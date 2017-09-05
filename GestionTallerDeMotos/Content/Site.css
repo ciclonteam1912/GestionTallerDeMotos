@@ -48,6 +48,10 @@ footer{
     display: none;
 }
 
+.dataTable-responsive {
+    width: 100% !important;
+}
+
 div.dt-buttons{
     float: right;
 }

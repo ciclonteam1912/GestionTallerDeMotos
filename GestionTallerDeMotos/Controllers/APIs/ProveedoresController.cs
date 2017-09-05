@@ -36,5 +36,15 @@ namespace GestionTallerDeMotos.Controllers.APIs
 
             return Ok(resultado);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarProveedor(int id)
+        {
+            var proveedor = _context.Proveedores.Single(a => a.Id == id);
+            _context.Proveedores.Remove(proveedor);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

@@ -56,5 +56,15 @@ namespace GestionTallerDeMotos.Controllers.APIs
 
             return Ok(resultado);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarProducto(int id)
+        {
+            var producto = _context.Productos.Single(p => p.Id == id);
+            _context.Productos.Remove(producto);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

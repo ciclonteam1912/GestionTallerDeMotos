@@ -45,5 +45,15 @@ namespace GestionTallerDeMotos.Controllers.APIs
 
             return Ok(resultado);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarAseguradora(int id)
+        {
+            var aseguradora = _context.Aseguradoras.Single(a => a.Id == id);
+            _context.Aseguradoras.Remove(aseguradora);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

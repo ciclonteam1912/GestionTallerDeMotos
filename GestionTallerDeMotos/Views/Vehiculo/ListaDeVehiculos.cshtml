@@ -10,7 +10,7 @@
         @Html.ActionLink("Nuevo Vehículo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
     </p>
 
-    <table id="vehiculos" class="table table-bordered table-hover table-responsive">
+    <table id="vehiculos" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
                 <th></th>
@@ -154,7 +154,7 @@
                                     toastr.success("Vehículo eliminado con éxito.");
                                 })
                                 .fail(function () {
-                                    toastr.error("No se puedo eliminar el vehículo.");
+                                    toastr.error("No se pudo eliminar el vehículo.");
                                 });
                         }
                     }

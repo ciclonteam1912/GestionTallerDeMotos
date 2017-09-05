@@ -11,9 +11,10 @@
         @Html.ActionLink("Nuevo Proveedor", "NuevoProveedor", "Proveedor", new { @class = "btn btn-primary" })
     </p>
 
-    <table id="proveedores" class="table table-bordered table-hover table-responsive">
+    <table id="proveedores" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Razón Social</th>
@@ -25,6 +26,7 @@
         <tbody></tbody>
         <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Código</th>
                 <th>Razón Social</th>
@@ -89,6 +91,13 @@
                         },
                     },
                     {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-proveedor-id=" + data + "></a>";
+                        },
+                    },
+                    {
                         data: "Id"
                     },
                     {
@@ -106,6 +115,38 @@
                 ]
             });
 
+            //Evento click al eliminar un proveedor
+            $("#proveedores").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar este proveedor?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/proveedores/" + button.attr("data-proveedor-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Proveedor eliminado con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se pudo eliminar el proveedor.");
+                                });
+                        }
+                    }
+                });
+            });
+
             // Apply the search
             table.columns().every(function () {
                 var that = this;
@@ -118,6 +159,18 @@
                     }
                 });
             });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         })
     </script>    
 }

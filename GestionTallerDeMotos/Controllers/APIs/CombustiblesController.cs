@@ -43,5 +43,15 @@ namespace GestionTallerDeMotos.Controllers.APIs
 
             return Ok(resultado);
         }
+
+        [HttpDelete]
+        public IHttpActionResult EliminarCombustibles(int id)
+        {
+            var combustible = _context.Combustibles.Single(p => p.Id == id);
+            _context.Combustibles.Remove(combustible);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
