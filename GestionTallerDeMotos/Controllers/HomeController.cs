@@ -26,5 +26,25 @@ namespace GestionTallerDeMotos.Controllers
 
             return View();
         }
+
+        public ActionResult Taller()
+        {
+            return View();
+        }
+
+        public ActionResult Ventas()
+        {
+            return View();
+        }
+
+        public ActionResult Compras()
+        {
+            return View();
+        }
+
+        public ActionResult Stock()
+        {
+            return View();
+        }
     }
 }
