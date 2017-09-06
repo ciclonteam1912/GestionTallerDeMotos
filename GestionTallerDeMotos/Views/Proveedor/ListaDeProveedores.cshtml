@@ -53,6 +53,27 @@
             });
 
             var table = $("#proveedores").DataTable({
+                bJQueryUI: true,
+                sPaginationType: "full_numbers",
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        text: 'Generar Listado',
+                        extend: 'pdfHtml5',
+                        customize: function (doc) {
+                            console.log(doc);
+                            doc.defaultStyle = {
+                                fontSize: 10
+                            },
+                                doc.content[0].text = 'Listado de Proveedores - Taller de Motos Pedrozo',
+                                doc.styles.tableHeader = {
+                                    fillColor: '#428BCA'
+                                }
+                        },
+                        download: 'open',
+                        className: 'btn btn-primary'
+                    }
+                ],
                 "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",

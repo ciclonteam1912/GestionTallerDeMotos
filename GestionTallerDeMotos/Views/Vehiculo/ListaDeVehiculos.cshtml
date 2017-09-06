@@ -7,7 +7,7 @@
     <h2>Lista De Vehículos</h2>
 
     <p>
-        @Html.ActionLink("Nuevo Vehículo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Nuevo Vehículo", "NuevoVehiculo", "Vehiculo", new { @class = "btn btn-primary fa fa-plus" })
     </p>
 
     <table id="vehiculos" class="table table-bordered table-hover dataTable-responsive">
@@ -58,6 +58,27 @@
             });
 
             var table = $("#vehiculos").DataTable({
+                bJQueryUI: true,
+                sPaginationType: "full_numbers",
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        text: 'Generar Listado',
+                        extend: 'pdfHtml5',
+                        customize: function (doc) {
+                            console.log(doc);
+                            doc.defaultStyle = {
+                                fontSize: 10
+                            },
+                                doc.content[0].text = 'Listado de Vehículos - Taller de Motos Pedrozo',
+                                doc.styles.tableHeader = {
+                                    fillColor: '#428BCA'
+                                }
+                        },
+                        download: 'open',
+                        className: 'btn btn-primary'
+                    }
+                ],
                 "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",
