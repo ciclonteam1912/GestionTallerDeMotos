@@ -64,6 +64,9 @@ div.dt-buttons{
     cursor: pointer;
 }
 
+i.icono.izquierda{
+    padding-right: 10px;
+}
 
 /*------------- MENÚ PRINCIPAL------------------*/
 .btn-menu {
@@ -139,7 +142,7 @@ div.dt-buttons{
 }
 
 .menu-principal .icono.izquierda {
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     float: left;
 }
 

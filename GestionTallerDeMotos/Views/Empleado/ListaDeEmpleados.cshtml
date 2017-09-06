@@ -1,26 +1,25 @@
-﻿@model IEnumerable<GestionTallerDeMotos.Models.ModelosDeDominio.Cliente>
+﻿
 @{
-    ViewBag.Title = "Lista De Clientes";
+    ViewBag.Title = "Lista De Empleados";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
-    <h2>Lista De Clientes</h2>
+    <h2>Lista De Empleados</h2>
 
-    <p>
-        @Html.ActionLink("Nuevo Cliente", "NuevoCliente", "Cliente", new { @class = "btn btn-primary" })
-    </p>
+    <p><a href="~/Empleado/NuevoEmpleado" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Empleado</a></p>
 
-    <table id="clientes" class="table table-bordered table-hover dataTable-responsive">
+    <table id="empleados" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
                 <th></th>
                 <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Tipo de Documento</th>
-                <th>Valor Documento</th>
-                <th>Personería</th>
+                <th>Cedula</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Salario</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -30,29 +29,30 @@
                 <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Tipo de Documento</th>
-                <th>Valor Documento</th>
-                <th>Personería</th>
+                <th>Cedula</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Salario</th>
             </tr>
         </tfoot>
-        </table>
+    </table>
 </div>
 
 @section Scripts{
     <script>
         $(document).ready(function () {
             $("#menuTaller").addClass('active');
-            $("#menuCliente").addClass('active');
+
             $("thead").show();
             $("tfoot").show();
 
-            $('#clientes tfoot th').each(function () {
+            $('#empleados tfoot th').each(function () {
                 var title = $(this).text();
                 if (title != "")
                     $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
             });
 
-            var table = $("#clientes").DataTable({
+            var table = $("#empleados").DataTable({
                 bJQueryUI: true,
                 sPaginationType: "full_numbers",
                 dom: 'Blfrtip',
@@ -65,10 +65,10 @@
                             doc.defaultStyle = {
                                 fontSize: 10
                             },
-                            doc.content[0].text = 'Lista de Clientes - Taller de Motos Pedrozo',
+                            doc.content[0].text = 'Lista de Empleados - Taller de Motos Pedrozo',
                                 doc.styles.tableHeader = {
-                                fillColor: '#428BCA'                                
-                            } 
+                                fillColor: '#428BCA'
+                            }
                         },
                         download: 'open',
                         className: 'btn btn-primary'
@@ -100,7 +100,7 @@
                     }
                 },
                 ajax: {
-                    url: "/api/clientes",
+                    url: "/api/empleados",
                     dataSrc: ""
                 },
                 columns: [
@@ -108,14 +108,14 @@
                         sortable: false,
                         data: "Id",
                         render: function (data) {
-                            return "<a href='/Cliente/EditarCliente/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                            return "<a href='/Empleado/EditarEmpleado/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
                         }
                     },
                     {
                         sortable: false,
                         data: "Id",
                         render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-cliente-id=" + data + "></a>";
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-empleado-id=" + data + "></a>";
                         }
                     },
                     {
@@ -125,23 +125,26 @@
                         data: "Apellido"
                     },
                     {
-                        data: "TipoDocumento.Descripcion"
+                        data: "Cedula"
                     },
                     {
-                        data: "ValorDocumento"
+                        data: "Direccion"
                     },
                     {
-                        data: "Personeria.Descripcion"
+                        data: "Telefono"
+                    },
+                    {
+                        data: "Salario"
                     }
                 ]
             });
 
-            //Evento click al eliminar un cliente
-            $("#clientes").on("click", ".js-eliminar", function () {
+            //Evento click al eliminar un empleado
+            $("#empleados").on("click", ".js-eliminar", function () {
                 var button = $(this);
 
                 bootbox.confirm({
-                    message: "¿Estás seguro de eliminar este cliente?",
+                    message: "¿Estás seguro de eliminar este empleado?",
                     buttons: {
                         "cancel": {
                             label: "Cancelar"
@@ -153,15 +156,15 @@
                     callback: function (result) {
                         if (result) {
                             $.ajax({
-                                url: "/api/clientes/" + button.attr("data-cliente-id"),
+                                url: "/api/empleados/" + button.attr("data-empleado-id"),
                                 method: "DELETE"
                             })
                                 .done(function () {
                                     table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Cliente eliminado con éxito.");
+                                    toastr.success("Empleado eliminado con éxito.");
                                 })
                                 .fail(function () {
-                                    toastr.error("No se pudo eliminar el cliente.");
+                                    toastr.error("No se pudo eliminar el empleado.");
                                 });
                         }
                     }
@@ -193,5 +196,5 @@
                 "extendedTimeOut": 1000
             }
         });
-    </script>    
+    </script>
 }

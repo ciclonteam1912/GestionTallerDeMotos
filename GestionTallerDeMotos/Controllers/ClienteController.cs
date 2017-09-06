@@ -22,12 +22,7 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            var clientes = _context.Clientes
-                .Include(c => c.TipoDocumento)
-                .Include(c => c.Personeria)
-                .ToList();
-
-            return View("ListaDeClientes", clientes);
+            return View("ListaDeClientes");
         }
 
 
