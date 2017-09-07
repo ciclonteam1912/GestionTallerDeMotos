@@ -63,7 +63,7 @@ namespace GestionTallerDeMotos.ViewModels
             Nombre = empleado.Nombre;
             Apellido = empleado.Apellido;
             Cedula = empleado.Cedula;
-            Direccion = empleado.Cedula;
+            Direccion = empleado.Direccion;
             Telefono = empleado.Telefono;
             CorreoElectronico = empleado.CorreoElectronico;
             FechaDeNacimiento = empleado.FechaDeNacimiento;

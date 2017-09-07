@@ -209,6 +209,7 @@
     <Compile Include="ConfiguracionDeEntidades\CombustibleConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\EmpleadoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\EstadoConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\FormaPagoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\MarcaConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ModeloConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\PersoneriaConfiguracion.cs" />
@@ -224,10 +225,12 @@
     <Compile Include="Controllers\APIs\CombustiblesController.cs" />
     <Compile Include="Controllers\APIs\EmpleadosController.cs" />
     <Compile Include="Controllers\APIs\EstadosController.cs" />
+    <Compile Include="Controllers\APIs\FormaPagosController.cs" />
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
     <Compile Include="Controllers\APIs\PresupuestosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\APIs\ProductosController.cs" />
     <Compile Include="Controllers\APIs\ProveedoresController.cs" />
@@ -246,6 +249,7 @@
     <Compile Include="Dtos\ClienteDto.cs" />
     <Compile Include="Dtos\CombustibleDto.cs" />
     <Compile Include="Dtos\EmpleadoDto.cs" />
+    <Compile Include="Dtos\FormaPagoDto.cs" />
     <Compile Include="Dtos\MarcaDto.cs" />
     <Compile Include="Dtos\ModeloDto.cs" />
     <Compile Include="Dtos\NuevoPresupuestoDto.cs" />
@@ -355,6 +359,10 @@
     <Compile Include="Migrations\201709062025532_CreacionDeTablaCargos.Designer.cs">
       <DependentUpon>201709062025532_CreacionDeTablaCargos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709062354498_CreacionDeTablaFormaPagos.cs" />
+    <Compile Include="Migrations\201709062354498_CreacionDeTablaFormaPagos.Designer.cs">
+      <DependentUpon>201709062354498_CreacionDeTablaFormaPagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AtributosDeValidación\ExistenciaMinMenorExistenciaActual.cs" />
@@ -367,6 +375,7 @@
     <Compile Include="Models\ModelosDeDominio\Combustible.cs" />
     <Compile Include="Models\ModelosDeDominio\Empleado.cs" />
     <Compile Include="Models\ModelosDeDominio\Estado.cs" />
+    <Compile Include="Models\ModelosDeDominio\FormaPago.cs" />
     <Compile Include="Models\ModelosDeDominio\Marca.cs" />
     <Compile Include="Models\ModelosDeDominio\Modelo.cs" />
     <Compile Include="Models\ModelosDeDominio\Personeria.cs" />
@@ -773,6 +782,8 @@
     <Content Include="Views\Home\Stock.cshtml" />
     <Content Include="Views\Empleado\ListaDeEmpleados.cshtml" />
     <Content Include="Views\Empleado\EmpleadoFormulario.cshtml" />
+    <Content Include="Views\FormaPago\ListaDeFormasDePago.cshtml" />
+    <Content Include="Views\FormaPago\NuevoFormaPagoFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -864,6 +875,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709062025532_CreacionDeTablaCargos.resx">
       <DependentUpon>201709062025532_CreacionDeTablaCargos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709062354498_CreacionDeTablaFormaPagos.resx">
+      <DependentUpon>201709062354498_CreacionDeTablaFormaPagos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

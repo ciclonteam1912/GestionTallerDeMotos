@@ -28,7 +28,11 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<Proveedor, ProveedorDto>();
             Mapper.CreateMap<Producto, Producto>();
             Mapper.CreateMap<Producto, ProductoDto>();
+            Mapper.CreateMap<Empleado, Empleado>()
+                .ForMember(e => e.FechaDeIngreso, opt => opt.Ignore());
             Mapper.CreateMap<Empleado, EmpleadoDto>();
+            Mapper.CreateMap<FormaPago, FormaPago>();
+            Mapper.CreateMap<FormaPago, FormaPagoDto>();
 
             //DTO a Dominio
             Mapper.CreateMap<MarcaDto, Marca>();
@@ -42,6 +46,7 @@ namespace GestionTallerDeMotos.App_Start
             Mapper.CreateMap<PresupuestoDto, Presupuesto>();
             Mapper.CreateMap<PresupuestoDetalleDto, PresupuestoDetalle>();
             Mapper.CreateMap<EmpleadoDto, Empleado>();
+            Mapper.CreateMap<FormaPagoDto, FormaPago>();
         }
     }
 }

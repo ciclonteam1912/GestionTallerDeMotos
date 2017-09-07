@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Lista De Formas De Pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
+    <h2>Lista De Forma de Pagos</h2>
+
+    <p><a href="~/FormaPago/NuevoFormaPago" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Forma de Pago</a></p>
+
+    <table id="formasDePago" class="table table-bordered table-hover dataTable-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#menuVentas").addClass('active');
+
+            $("thead").show();
+            $("tfoot").show();
+
+            $('#formasDePago tfoot th').each(function () {
+                var title = $(this).text();
+                if (title != "")
+                    $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
+            });
+
+            var table = $("#formasDePago").DataTable({
+                bJQueryUI: true,
+                sPaginationType: "full_numbers",
+                "scrollX": true,
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                ajax: {
+                    url: "/api/formaPagos",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='/FormaPago/EditarFormaPago/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                        }
+                    },
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-formaPago-id=" + data + "></a>";
+                        }
+                    },
+                    {
+                        data: "Nombre"
+                    },
+                    {
+                        data: "Descripcion"
+                    }
+                ]
+            });
+
+            //Evento click al eliminar un empleado
+            $("#formasDePago").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar esta forma de pago?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/formaPagos/" + button.attr("data-formaPago-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Forma de pago eliminada con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se pudo eliminar la forma de pago.");
+                                });
+                        }
+                    }
+                });
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
+        });
+    </script>
+}
+
+
+
+
