@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Lista De Formas De Pago";
+    ViewBag.Title = "Lista De Servicios Basicos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
-    <h2>Lista de Formas de Pagos</h2>
+    <h2>Lista de Servicios Básicos</h2>
 
-    <p><a href="~/FormaPago/NuevoFormaPago" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Forma de Pago</a></p>
+    <p><a href="~/ServicioBasico/NuevoServicioBasico" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Servicio Básico</a></p>
 
-    <table id="formasDePago" class="table table-bordered table-hover dataTable-responsive">
+    <table id="serviciosBasicos" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
                 <th></th>
@@ -33,18 +33,18 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $("#menuVentas").addClass('active');
+            $("#menuCompras").addClass('active');
 
             $("thead").show();
             $("tfoot").show();
 
-            $('#formasDePago tfoot th').each(function () {
+            $('#serviciosBasicos tfoot th').each(function () {
                 var title = $(this).text();
                 if (title != "")
                     $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
             });
 
-            var table = $("#formasDePago").DataTable({
+            var table = $("#serviciosBasicos").DataTable({
                 bJQueryUI: true,
                 sPaginationType: "full_numbers",
                 "scrollX": true,
@@ -73,7 +73,7 @@
                     }
                 },
                 ajax: {
-                    url: "/api/formaPagos",
+                    url: "/api/serviciosBasicos",
                     dataSrc: ""
                 },
                 columns: [
@@ -81,14 +81,14 @@
                         sortable: false,
                         data: "Id",
                         render: function (data) {
-                            return "<a href='/FormaPago/EditarFormaPago/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                            return "<a href='/ServicioBasico/EditarServicioBasico/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
                         }
                     },
                     {
                         sortable: false,
                         data: "Id",
                         render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-formaPago-id=" + data + "></a>";
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-serviciosBasico-id=" + data + "></a>";
                         }
                     },
                     {
@@ -100,12 +100,12 @@
                 ]
             });
 
-            //Evento click al eliminar un empleado
-            $("#formasDePago").on("click", ".js-eliminar", function () {
+            //Evento click al eliminar un servicio básico
+            $("#serviciosBasicos").on("click", ".js-eliminar", function () {
                 var button = $(this);
 
                 bootbox.confirm({
-                    message: "¿Estás seguro de eliminar esta forma de pago?",
+                    message: "¿Estás seguro de eliminar este servicio básico?",
                     buttons: {
                         "cancel": {
                             label: "Cancelar"
@@ -117,15 +117,15 @@
                     callback: function (result) {
                         if (result) {
                             $.ajax({
-                                url: "/api/formaPagos/" + button.attr("data-formaPago-id"),
+                                url: "/api/serviciosBasicos/" + button.attr("data-serviciosBasico-id"),
                                 method: "DELETE"
                             })
                                 .done(function () {
                                     table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Forma de pago eliminada con éxito.");
+                                    toastr.success("Servicio Básico eliminado con éxito.");
                                 })
                                 .fail(function () {
-                                    toastr.error("No se pudo eliminar la forma de pago.");
+                                    toastr.error("No se pudo eliminar el servicio básico.");
                                 });
                         }
                     }
@@ -159,7 +159,3 @@
         });
     </script>
 }
-
-
-
-

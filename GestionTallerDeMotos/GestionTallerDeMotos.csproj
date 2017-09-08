@@ -217,6 +217,7 @@
     <Compile Include="ConfiguracionDeEntidades\PresupuestoDetalleConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ProductoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ProveedorConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\ServicioBasicoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\TipoDocumentoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\VehiculoConfiguracion.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Controllers\APIs\MarcasController.cs" />
     <Compile Include="Controllers\APIs\ModelosController.cs" />
     <Compile Include="Controllers\APIs\PresupuestosController.cs" />
+    <Compile Include="Controllers\APIs\ServiciosBasicosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\PresupuestoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\ServicioBasicoController.cs" />
     <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Dtos\AseguradoraDto.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
@@ -258,6 +261,7 @@
     <Compile Include="Dtos\PresupuestoDto.cs" />
     <Compile Include="Dtos\ProductoDto.cs" />
     <Compile Include="Dtos\ProveedorDto.cs" />
+    <Compile Include="Dtos\ServicioBasicoDto.cs" />
     <Compile Include="Dtos\TipoDocumentoDto.cs" />
     <Compile Include="Dtos\VehiculoDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -363,6 +367,10 @@
     <Compile Include="Migrations\201709062354498_CreacionDeTablaFormaPagos.Designer.cs">
       <DependentUpon>201709062354498_CreacionDeTablaFormaPagos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.cs" />
+    <Compile Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.Designer.cs">
+      <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AtributosDeValidación\ExistenciaMinMenorExistenciaActual.cs" />
@@ -383,6 +391,7 @@
     <Compile Include="Models\ModelosDeDominio\PresupuestoDetalle.cs" />
     <Compile Include="Models\ModelosDeDominio\Producto.cs" />
     <Compile Include="Models\ModelosDeDominio\Proveedor.cs" />
+    <Compile Include="Models\ModelosDeDominio\ServicioBasico.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
     <Compile Include="Models\ModelosDeDominio\Vehiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -784,6 +793,8 @@
     <Content Include="Views\Empleado\EmpleadoFormulario.cshtml" />
     <Content Include="Views\FormaPago\ListaDeFormasDePago.cshtml" />
     <Content Include="Views\FormaPago\NuevoFormaPagoFormulario.cshtml" />
+    <Content Include="Views\ServicioBasico\ListaDeServiciosBasicos.cshtml" />
+    <Content Include="Views\ServicioBasico\ServicioBasicoFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -878,6 +889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709062354498_CreacionDeTablaFormaPagos.resx">
       <DependentUpon>201709062354498_CreacionDeTablaFormaPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.resx">
+      <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
