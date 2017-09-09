@@ -2,10 +2,7 @@
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -22,9 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Modelo
         public ActionResult Index()
         {
-            return View("ListaDeModelos");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeModelos");
+
+            return View("ListaDeModelosSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoModelo()
         {
             var marcas = _context.Marcas.ToList();
@@ -37,6 +38,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ModeloFormulario", viewModel);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarModelo(Modelo modelo)
@@ -64,6 +66,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarModelo(int id)
         {
             var modeloBD = _context.Modelos.SingleOrDefault(c => c.Id == id);

@@ -41,6 +41,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(Mapper.Map<Producto, ProductoDto>(producto));
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearProducto(ProductoDto productoDto)
         {
@@ -57,6 +58,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarProducto(int id)
         {

@@ -7,13 +7,9 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista de Servicios Básicos</h2>
 
-    <p><a href="~/ServicioBasico/NuevoServicioBasico" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Servicio Básico</a></p>
-
     <table id="serviciosBasicos" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Descripción</th>
             </tr>
@@ -21,8 +17,6 @@
         <tbody></tbody>
         <tfoot>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Descripción</th>
             </tr>
@@ -78,58 +72,12 @@
                 },
                 columns: [
                     {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='/ServicioBasico/EditarServicioBasico/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        }
-                    },
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-serviciosBasico-id=" + data + "></a>";
-                        }
-                    },
-                    {
                         data: "Nombre"
                     },
                     {
                         data: "Descripcion"
                     }
                 ]
-            });
-
-            //Evento click al eliminar un servicio básico
-            $("#serviciosBasicos").on("click", ".js-eliminar", function () {
-                var button = $(this);
-
-                bootbox.confirm({
-                    message: "¿Estás seguro de eliminar este servicio básico?",
-                    buttons: {
-                        "cancel": {
-                            label: "Cancelar"
-                        },
-                        "confirm": {
-                            label: "Eliminar"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/serviciosBasicos/" + button.attr("data-serviciosBasico-id"),
-                                method: "DELETE"
-                            })
-                                .done(function () {
-                                    table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Servicio Básico eliminado con éxito.");
-                                })
-                                .fail(function () {
-                                    toastr.error("No se pudo eliminar el servicio básico.");
-                                });
-                        }
-                    }
-                });
             });
 
             // Apply the search
@@ -144,18 +92,6 @@
                     }
                 });
             });
-
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
-            }
         });
     </script>
 }

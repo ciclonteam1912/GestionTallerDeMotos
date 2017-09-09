@@ -27,9 +27,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Empleado
         public ActionResult Index()
         {
-            return View("ListaDeEmpleados");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeEmpleados");
+
+            return View("ListaDeEmpleadosSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoEmpleado()
         {
             var cargos = _context.Cargos.ToList();
@@ -42,6 +46,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("EmpleadoFormulario", viewModel);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarEmpleado(Empleado empleado)
@@ -72,7 +77,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarEmpleado(int id)
         {
             var empleado = _context.Empleados.SingleOrDefault(c => c.Id == id);

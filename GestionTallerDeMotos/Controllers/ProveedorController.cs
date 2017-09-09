@@ -18,9 +18,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Proveedor
         public ActionResult Index()
         {
-            return View("ListaDeProveedores");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeProveedores");
+
+            return View("ListaDeProveedoresSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoProveedor()
         {
             var proveedor = new Proveedor();
@@ -28,6 +32,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ProveedorFormulario", proveedor);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProveedor(Proveedor proveedor)
@@ -48,6 +53,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarProveedor(int id)
         {
             var proveedorBD = _context.Proveedores.SingleOrDefault(p => p.Id == id);

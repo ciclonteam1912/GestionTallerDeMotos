@@ -32,6 +32,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(empleados);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearEmpleado(EmpleadoDto empleadoDto)
         {
@@ -49,6 +50,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarEmpleado(int id)
         {

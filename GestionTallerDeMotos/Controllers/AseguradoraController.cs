@@ -21,9 +21,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Aseguradora
         public ActionResult Index()
         {
-            return View("ListaDeAseguradoras");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeAseguradoras");
+
+            return View("ListaDeAseguradorasSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevaAseguradora()
         {
             var aseguradora = new Aseguradora();
@@ -33,6 +37,7 @@ namespace GestionTallerDeMotos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult GuardarAseguradora(Aseguradora aseguradora)
         {
             if (!ModelState.IsValid)
@@ -51,6 +56,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarAseguradora(int id)
         {
             var aseguradoraBD = _context.Aseguradoras.SingleOrDefault(c => c.Id == id);

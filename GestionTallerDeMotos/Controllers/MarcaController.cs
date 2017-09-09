@@ -18,15 +18,20 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Marca
         public ActionResult Index()
         {
-            return View("ListaDeMarcas");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeMarcas");
+
+            return View("ListaDeMarcasSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevaMarca()
         {
             var marca = new Marca();
             return View("MarcaFormulario", marca);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarMarca(Marca marca)
@@ -47,6 +52,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarMarca(int id)
         {
             var marcaBD = _context.Marcas.SingleOrDefault(c => c.Id == id);

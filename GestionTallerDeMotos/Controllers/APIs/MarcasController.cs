@@ -2,11 +2,7 @@
 using GestionTallerDeMotos.Dtos;
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace GestionTallerDeMotos.Controllers.APIs
@@ -29,6 +25,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(marcas);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearMarca(MarcaDto marcaDto)
         {
@@ -48,6 +45,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarMarca(int id)
         {

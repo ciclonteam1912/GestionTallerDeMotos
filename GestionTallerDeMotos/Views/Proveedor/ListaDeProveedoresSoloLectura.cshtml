@@ -7,15 +7,9 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista De Proveedores</h2>
 
-    <p>
-        @Html.ActionLink("Nuevo Proveedor", "NuevoProveedor", "Proveedor", new { @class = "btn btn-primary" })
-    </p>
-
     <table id="proveedores" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Código</th>
                 <th>Razón Social</th>
                 <th>Ruc</th>
@@ -26,8 +20,6 @@
         <tbody></tbody>
         <tfoot>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Código</th>
                 <th>Razón Social</th>
                 <th>Ruc</th>
@@ -54,26 +46,7 @@
 
             var table = $("#proveedores").DataTable({
                 bJQueryUI: true,
-                sPaginationType: "full_numbers",
-                dom: 'Blfrtip',
-                buttons: [
-                    {
-                        text: 'Generar Listado',
-                        extend: 'pdfHtml5',
-                        customize: function (doc) {
-                            console.log(doc);
-                            doc.defaultStyle = {
-                                fontSize: 10
-                            },
-                                doc.content[0].text = 'Listado de Proveedores - Taller de Motos Pedrozo',
-                                doc.styles.tableHeader = {
-                                    fillColor: '#428BCA'
-                                }
-                        },
-                        download: 'open',
-                        className: 'btn btn-primary'
-                    }
-                ],
+                sPaginationType: "full_numbers",               
                 "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",
@@ -103,21 +76,7 @@
                     url: "/api/proveedores",
                     dataSrc: ""
                 },
-                columns: [
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='/Proveedor/EditarProveedor/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        },
-                    },
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-proveedor-id=" + data + "></a>";
-                        },
-                    },
+                columns: [                    
                     {
                         data: "Id"
                     },
@@ -136,38 +95,6 @@
                 ]
             });
 
-            //Evento click al eliminar un proveedor
-            $("#proveedores").on("click", ".js-eliminar", function () {
-                var button = $(this);
-
-                bootbox.confirm({
-                    message: "¿Estás seguro de eliminar este proveedor?",
-                    buttons: {
-                        "cancel": {
-                            label: "Cancelar"
-                        },
-                        "confirm": {
-                            label: "Eliminar"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/proveedores/" + button.attr("data-proveedor-id"),
-                                method: "DELETE"
-                            })
-                                .done(function () {
-                                    table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Proveedor eliminado con éxito.");
-                                })
-                                .fail(function () {
-                                    toastr.error("No se pudo eliminar el proveedor.");
-                                });
-                        }
-                    }
-                });
-            });
-
             // Apply the search
             table.columns().every(function () {
                 var that = this;
@@ -180,18 +107,6 @@
                     }
                 });
             });
-
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
-            }
         })
     </script>    
 }

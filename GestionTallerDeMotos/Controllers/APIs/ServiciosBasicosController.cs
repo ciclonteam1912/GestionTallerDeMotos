@@ -31,6 +31,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(serviciosBasicos);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearServicioBasico(ServicioBasicoDto servicioBasicoDto)
         {
@@ -47,6 +48,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarServicioBasico(int id)
         {

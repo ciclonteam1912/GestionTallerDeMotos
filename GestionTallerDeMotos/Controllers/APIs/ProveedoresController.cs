@@ -24,6 +24,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(proveedores);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearProveedor(ProveedorDto proveedorDto)
         {
@@ -37,6 +38,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarProveedor(int id)
         {

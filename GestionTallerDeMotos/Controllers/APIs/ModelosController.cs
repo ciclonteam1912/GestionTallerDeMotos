@@ -2,12 +2,8 @@
 using GestionTallerDeMotos.Dtos;
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace GestionTallerDeMotos.Controllers.APIs
@@ -29,6 +25,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(modelos);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearModelo(ModeloDto modeloDto)
         {
@@ -46,6 +43,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(resultado);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarModelo(int id)
         {

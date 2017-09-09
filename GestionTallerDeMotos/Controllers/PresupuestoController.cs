@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GestionTallerDeMotos.Models;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -9,9 +6,9 @@ namespace GestionTallerDeMotos.Controllers
     public class PresupuestoController : Controller
     {
         // GET: Presupuesto
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult Index()
         {
-
             return View("PresupuestoDetalleFormulario");
         }
     }

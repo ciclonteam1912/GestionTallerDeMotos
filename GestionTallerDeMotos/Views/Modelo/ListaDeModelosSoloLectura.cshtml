@@ -7,15 +7,9 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista De Modelos</h2>
 
-    <p>
-        @Html.ActionLink("Nuevo Modelo", "NuevoModelo", "Modelo", new { @class = "btn btn-primary" })
-    </p>
-
     <table id="modelos" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
                 <th>Marca</th>
@@ -24,8 +18,6 @@
         <tbody></tbody>
         <tfoot>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
                 <th>Marca</th>
@@ -81,20 +73,6 @@
                 },
                 columns: [
                     {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='/Modelo/EditarModelo/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        }
-                    },
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-modelo-id=" + data + "></a>";
-                        }
-                    },
-                    {
                         data: "Id"
                     },
                     {
@@ -104,38 +82,6 @@
                         data: "Marca.Nombre"
                     }
                 ]
-            });
-
-            //Evento click al eliminar un modelo
-            $("#modelos").on("click", ".js-eliminar", function () {
-                var button = $(this);
-
-                bootbox.confirm({
-                    message: "¿Estás seguro de eliminar este modelo?",
-                    buttons: {
-                        "cancel": {
-                            label: "Cancelar"
-                        },
-                        "confirm": {
-                            label: "Eliminar"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/modelos/" + button.attr("data-modelo-id"),
-                                method: "DELETE"
-                            })
-                            .done(function () {
-                                table.row(button.parents("tr")).remove().draw();
-                                toastr.success("Modelo eliminado con éxito.");
-                            })
-                            .fail(function () {
-                                toastr.error("No se puedo eliminar el modelo.");
-                            });
-                        }
-                    }
-                });
             });
 
             // Apply the search
@@ -150,18 +96,6 @@
                     }
                 });
             });
-
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
-            }
         });
     </script>    
 }

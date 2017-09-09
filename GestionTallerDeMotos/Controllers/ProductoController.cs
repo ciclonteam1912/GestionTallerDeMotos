@@ -19,9 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Producto
         public ActionResult Index()
         {
-            return View("ListaDeProductos");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeProductos");
+
+            return View("ListaDeProductosSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoProducto()
         {
             var viewModel = new ProductoViewModel
@@ -32,6 +36,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ProductoFormulario", viewModel);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProducto(Producto producto)
@@ -59,6 +64,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarProducto(int id)
         {
             var productoBD = _context.Productos.SingleOrDefault(c => c.Id == id);

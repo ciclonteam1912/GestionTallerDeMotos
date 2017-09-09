@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -26,9 +23,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: FormaPago
         public ActionResult Index()
         {
-            return View("ListaDeFormasDePago");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeFormasDePago");
+
+            return View("ListaDeFormasDePagoSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoFormaPago()
         {
             var formaPago = new FormaPago();
@@ -36,6 +37,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("NuevoFormaPagoFormulario", formaPago);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarFormaPago(FormaPago formaPago)
@@ -60,7 +62,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarFormaPago(int id)
         {
             var formaPagoBD = _context.FormaPagos.SingleOrDefault(c => c.Id == id);

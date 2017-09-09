@@ -30,6 +30,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             return Ok(clientes);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpDelete]
         public IHttpActionResult EliminarCliente(int id)
         {

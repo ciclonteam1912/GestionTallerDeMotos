@@ -3,9 +3,7 @@ using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -21,10 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View("ListaDeVehiculos");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeVehiculos");
+
+            return View("ListaDeVehiculosSoloLectura");
         }
 
-
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoVehiculo()
         {
             var clientes = _context.Clientes.ToList();
@@ -43,6 +44,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("VehiculoFormulario", viewModel);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarVehiculo(Vehiculo vehiculo)
@@ -76,7 +78,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarVehiculo(int id)
         {
             var vehiculo = _context.Vehiculos.SingleOrDefault(c => c.Id == id);

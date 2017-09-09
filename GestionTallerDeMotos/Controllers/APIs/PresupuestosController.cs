@@ -16,6 +16,7 @@ namespace GestionTallerDeMotos.Controllers.APIs
             _context = new ApplicationDbContext();
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         public IHttpActionResult CrearPresupuesto(NuevoPresupuestoDto nuevoPresupuestoDto)
         {

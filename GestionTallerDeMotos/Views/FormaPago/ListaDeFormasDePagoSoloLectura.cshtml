@@ -7,13 +7,9 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista de Formas de Pagos</h2>
 
-    <p><a href="~/FormaPago/NuevoFormaPago" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Forma de Pago</a></p>
-
     <table id="formasDePago" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Descripción</th>
             </tr>
@@ -21,8 +17,6 @@
         <tbody></tbody>
         <tfoot>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Descripción</th>
             </tr>
@@ -76,21 +70,7 @@
                     url: "/api/formaPagos",
                     dataSrc: ""
                 },
-                columns: [
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='/FormaPago/EditarFormaPago/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        }
-                    },
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-formaPago-id=" + data + "></a>";
-                        }
-                    },
+                columns: [                    
                     {
                         data: "Nombre"
                     },
@@ -98,38 +78,6 @@
                         data: "Descripcion"
                     }
                 ]
-            });
-
-            //Evento click al eliminar un empleado
-            $("#formasDePago").on("click", ".js-eliminar", function () {
-                var button = $(this);
-
-                bootbox.confirm({
-                    message: "¿Estás seguro de eliminar esta forma de pago?",
-                    buttons: {
-                        "cancel": {
-                            label: "Cancelar"
-                        },
-                        "confirm": {
-                            label: "Eliminar"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/formaPagos/" + button.attr("data-formaPago-id"),
-                                method: "DELETE"
-                            })
-                                .done(function () {
-                                    table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Forma de pago eliminada con éxito.");
-                                })
-                                .fail(function () {
-                                    toastr.error("No se pudo eliminar la forma de pago.");
-                                });
-                        }
-                    }
-                });
             });
 
             // Apply the search
@@ -144,18 +92,6 @@
                     }
                 });
             });
-
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
-            }
         });
     </script>
 }

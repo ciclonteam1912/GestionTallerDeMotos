@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -26,9 +23,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: ServicioBasico
         public ActionResult Index()
         {
-            return View("ListaDeServiciosBasicos");
+            if(User.IsInRole(RoleName.Administrador))
+                return View("ListaDeServiciosBasicos");
+
+            return View("ListaDeServiciosBasicosSoloLectura");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult NuevoServicioBasico()
         {
             var servicioBasico = new ServicioBasico();
@@ -36,6 +37,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ServicioBasicoFormulario", servicioBasico);
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarServicioBasico(ServicioBasico servicioBasico)
@@ -58,6 +60,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult EditarServicioBasico(int id)
         {
             var servicioBasicoBD = _context.ServiciosBasicos.SingleOrDefault(c => c.Id == id);

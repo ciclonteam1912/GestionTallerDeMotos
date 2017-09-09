@@ -371,6 +371,10 @@
     <Compile Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.Designer.cs">
       <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.cs" />
+    <Compile Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.Designer.cs">
+      <DependentUpon>201709081641055_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AtributosDeValidación\ExistenciaMinMenorExistenciaActual.cs" />
@@ -394,6 +398,7 @@
     <Compile Include="Models\ModelosDeDominio\ServicioBasico.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
     <Compile Include="Models\ModelosDeDominio\Vehiculo.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClienteViewModel.cs" />
@@ -795,6 +800,17 @@
     <Content Include="Views\FormaPago\NuevoFormaPagoFormulario.cshtml" />
     <Content Include="Views\ServicioBasico\ListaDeServiciosBasicos.cshtml" />
     <Content Include="Views\ServicioBasico\ServicioBasicoFormulario.cshtml" />
+    <Content Include="Views\Aseguradora\ListaDeAseguradorasSoloLectura.cshtml" />
+    <Content Include="Views\Cliente\ListaDeClientesSoloLectura.cshtml" />
+    <Content Include="Views\Combustible\ListaDeCombustiblesSoloLectura.cshtml" />
+    <Content Include="Views\Empleado\ListaDeEmpleadosSoloLectura.cshtml" />
+    <Content Include="Views\FormaPago\ListaDeFormasDePagoSoloLectura.cshtml" />
+    <Content Include="Views\Marca\ListaDeMarcasSoloLectura.cshtml" />
+    <Content Include="Views\Modelo\ListaDeModelosSoloLectura.cshtml" />
+    <Content Include="Views\Producto\ListaDeProductosSoloLectura.cshtml" />
+    <Content Include="Views\Proveedor\ListaDeProveedoresSoloLectura.cshtml" />
+    <Content Include="Views\ServicioBasico\ListaDeServiciosBasicosSoloLectura.cshtml" />
+    <Content Include="Views\Vehiculo\ListaDeVehiculosSoloLectura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -892,6 +908,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.resx">
       <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.resx">
+      <DependentUpon>201709081641055_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

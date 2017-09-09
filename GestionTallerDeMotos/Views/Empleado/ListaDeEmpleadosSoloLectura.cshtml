@@ -7,13 +7,9 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista De Empleados</h2>
 
-    <p><a href="~/Empleado/NuevoEmpleado" class="btn btn-primary"><i class="fa fa-plus icono izquierda"></i>Agregar Empleado</a></p>
-
     <table id="empleados" class="table table-bordered table-hover dataTable-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Cedula</th>
@@ -25,8 +21,6 @@
         <tbody></tbody>
         <tfoot>
             <tr>
-                <th></th>
-                <th></th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Cedula</th>
@@ -55,25 +49,6 @@
             var table = $("#empleados").DataTable({
                 bJQueryUI: true,
                 sPaginationType: "full_numbers",
-                dom: 'Blfrtip',
-                buttons: [
-                    {
-                        text: 'Generar Listado',
-                        extend: 'pdfHtml5',
-                        customize: function (doc) {
-                            console.log(doc);
-                            doc.defaultStyle = {
-                                fontSize: 10
-                            },
-                            doc.content[0].text = 'Lista de Empleados - Taller de Motos Pedrozo',
-                                doc.styles.tableHeader = {
-                                fillColor: '#428BCA'
-                            }
-                        },
-                        download: 'open',
-                        className: 'btn btn-primary'
-                    }
-                ],
                 "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",
@@ -103,21 +78,7 @@
                     url: "/api/empleados",
                     dataSrc: ""
                 },
-                columns: [
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='/Empleado/EditarEmpleado/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
-                        }
-                    },
-                    {
-                        sortable: false,
-                        data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-empleado-id=" + data + "></a>";
-                        }
-                    },
+                columns: [                   
                     {
                         data: "Nombre"
                     },
@@ -139,38 +100,6 @@
                 ]
             });
 
-            //Evento click al eliminar un empleado
-            $("#empleados").on("click", ".js-eliminar", function () {
-                var button = $(this);
-
-                bootbox.confirm({
-                    message: "¿Estás seguro de eliminar este empleado?",
-                    buttons: {
-                        "cancel": {
-                            label: "Cancelar"
-                        },
-                        "confirm": {
-                            label: "Eliminar"
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/empleados/" + button.attr("data-empleado-id"),
-                                method: "DELETE"
-                            })
-                                .done(function () {
-                                    table.row(button.parents("tr")).remove().draw();
-                                    toastr.success("Empleado eliminado con éxito.");
-                                })
-                                .fail(function () {
-                                    toastr.error("No se pudo eliminar el empleado.");
-                                });
-                        }
-                    }
-                });
-            });
-
             // Apply the search
             table.columns().every(function () {
                 var that = this;
@@ -183,18 +112,6 @@
                     }
                 });
             });
-
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "debug": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
-            }
         });
     </script>
 }
