@@ -6,7 +6,7 @@ namespace GestionTallerDeMotos.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
     }
 
@@ -42,16 +42,19 @@ namespace GestionTallerDeMotos.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
+        //[Required]
+        //[Display(Name = "Correo Electrónico")]
+        //[EmailAddress]
+        //public string Email { get; set; }
         [Required]
-        [Display(Name = "Correo electrónico")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -65,8 +68,12 @@ namespace GestionTallerDeMotos.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
 
         [Required]
@@ -85,7 +92,7 @@ namespace GestionTallerDeMotos.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
 
         [Required]
@@ -106,7 +113,7 @@ namespace GestionTallerDeMotos.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
     }
 }

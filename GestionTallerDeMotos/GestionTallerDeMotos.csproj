@@ -231,6 +231,7 @@
     <Compile Include="Controllers\APIs\ModelosController.cs" />
     <Compile Include="Controllers\APIs\PresupuestosController.cs" />
     <Compile Include="Controllers\APIs\ServiciosBasicosController.cs" />
+    <Compile Include="Controllers\APIs\UsuariosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -246,7 +247,9 @@
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\PresupuestoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioBasicoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Dtos\AseguradoraDto.cs" />
     <Compile Include="Dtos\ClienteDto.cs" />
@@ -371,9 +374,9 @@
     <Compile Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.Designer.cs">
       <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.cs" />
-    <Compile Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.Designer.cs">
-      <DependentUpon>201709081641055_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
+    <Compile Include="Migrations\201709101616406_CargarUsuarioYRolPorDefecto.cs" />
+    <Compile Include="Migrations\201709101616406_CargarUsuarioYRolPorDefecto.Designer.cs">
+      <DependentUpon>201709101616406_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -811,6 +814,11 @@
     <Content Include="Views\Proveedor\ListaDeProveedoresSoloLectura.cshtml" />
     <Content Include="Views\ServicioBasico\ListaDeServiciosBasicosSoloLectura.cshtml" />
     <Content Include="Views\Vehiculo\ListaDeVehiculosSoloLectura.cshtml" />
+    <Content Include="Views\Usuario\ListaDeUsuarios.cshtml" />
+    <Content Include="Views\Rol\ListaDeRoles.cshtml" />
+    <Content Include="Views\Rol\Create.cshtml" />
+    <Content Include="Views\Rol\Edit.cshtml" />
+    <Content Include="Views\Rol\ManageUserRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -909,8 +917,8 @@
     <EmbeddedResource Include="Migrations\201709072353249_CreacionDeTablaServiciosBasicos.resx">
       <DependentUpon>201709072353249_CreacionDeTablaServiciosBasicos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709081641055_CargarUsuarioYRolPorDefecto.resx">
-      <DependentUpon>201709081641055_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709101616406_CargarUsuarioYRolPorDefecto.resx">
+      <DependentUpon>201709101616406_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

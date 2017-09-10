@@ -13,7 +13,7 @@ namespace GestionTallerDeMotos.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709081641055_CargarUsuarioYRolPorDefecto"; }
+            get { return "201709101616406_CargarUsuarioYRolPorDefecto"; }
         }
         
         string IMigrationMetadata.Source
