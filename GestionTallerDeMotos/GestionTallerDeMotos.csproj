@@ -380,6 +380,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AtributosDeAutorizacion\AutorizacionPersonalizada.cs" />
     <Compile Include="Models\AtributosDeValidación\ExistenciaMinMenorExistenciaActual.cs" />
     <Compile Include="Models\AtributosDeValidación\PrecioVentaMayorPrecioCosto.cs" />
     <Compile Include="Models\IdentityModels.cs" />

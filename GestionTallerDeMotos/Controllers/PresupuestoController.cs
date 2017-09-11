@@ -1,4 +1,5 @@
 ﻿using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -6,7 +7,7 @@ namespace GestionTallerDeMotos.Controllers
     public class PresupuestoController : Controller
     {
         // GET: Presupuesto
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult Index()
         {
             return View("PresupuestoDetalleFormulario");

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using System.Linq;
 using System.Web.Mvc;
@@ -18,20 +19,20 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Combustible
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
                 return View("ListaDeCombustibles");
 
             return View("ListaDeCombustiblesSoloLectura");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult NuevoCombustible()
         {
             var combustible = new Combustible();
             return View("CombustibleFormulario", combustible);
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarCombustible(Combustible combustible)
@@ -52,7 +53,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult EditarCombustible(int id)
         {
             var combustibleBD = _context.Combustibles.SingleOrDefault(c => c.Id == id);

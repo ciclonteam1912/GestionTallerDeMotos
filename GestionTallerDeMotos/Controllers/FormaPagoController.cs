@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,13 +24,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: FormaPago
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
                 return View("ListaDeFormasDePago");
 
             return View("ListaDeFormasDePagoSoloLectura");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult NuevoFormaPago()
         {
             var formaPago = new FormaPago();
@@ -37,7 +38,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("NuevoFormaPagoFormulario", formaPago);
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarFormaPago(FormaPago formaPago)
@@ -62,7 +63,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult EditarFormaPago(int id)
         {
             var formaPagoBD = _context.FormaPagos.SingleOrDefault(c => c.Id == id);

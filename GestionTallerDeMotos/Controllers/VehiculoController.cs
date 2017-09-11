@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
 using System;
@@ -19,13 +20,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
                 return View("ListaDeVehiculos");
 
             return View("ListaDeVehiculosSoloLectura");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult NuevoVehiculo()
         {
             var clientes = _context.Clientes.ToList();
@@ -44,7 +45,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("VehiculoFormulario", viewModel);
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarVehiculo(Vehiculo vehiculo)
@@ -78,7 +79,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult EditarVehiculo(int id)
         {
             var vehiculo = _context.Vehiculos.SingleOrDefault(c => c.Id == id);

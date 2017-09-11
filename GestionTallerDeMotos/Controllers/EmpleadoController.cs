@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
 using GestionTallerDeMotos.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -27,13 +26,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Empleado
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
                 return View("ListaDeEmpleados");
 
             return View("ListaDeEmpleadosSoloLectura");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult NuevoEmpleado()
         {
             var cargos = _context.Cargos.ToList();
@@ -46,7 +45,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("EmpleadoFormulario", viewModel);
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarEmpleado(Empleado empleado)
@@ -77,7 +76,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult EditarEmpleado(int id)
         {
             var empleado = _context.Empleados.SingleOrDefault(c => c.Id == id);

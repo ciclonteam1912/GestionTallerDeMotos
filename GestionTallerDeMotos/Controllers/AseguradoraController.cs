@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using GestionTallerDeMotos.Models.ModelosDeDominio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
@@ -21,13 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Aseguradora
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
                 return View("ListaDeAseguradoras");
 
             return View("ListaDeAseguradorasSoloLectura");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult NuevaAseguradora()
         {
             var aseguradora = new Aseguradora();
@@ -35,9 +33,9 @@ namespace GestionTallerDeMotos.Controllers
             return View("AseguradoraFormulario", aseguradora);
         }
 
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = RoleName.Administrador)]
         public ActionResult GuardarAseguradora(Aseguradora aseguradora)
         {
             if (!ModelState.IsValid)
@@ -56,7 +54,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = RoleName.Administrador)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
         public ActionResult EditarAseguradora(int id)
         {
             var aseguradoraBD = _context.Aseguradoras.SingleOrDefault(c => c.Id == id);

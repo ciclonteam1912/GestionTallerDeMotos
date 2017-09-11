@@ -1,4 +1,5 @@
 ﻿using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
 {
-    [Authorize(Roles = RoleName.Administrador)]
+    [AutorizacionPersonalizada(Roles = RoleName.Administrador)]
     public class RolController : Controller
     {
         private ApplicationDbContext _context;

@@ -1,11 +1,11 @@
 ﻿using GestionTallerDeMotos.Models;
-using System;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
 {
-    [Authorize(Roles = RoleName.Administrador)]
+    [AutorizacionPersonalizada(Roles = RoleName.Administrador)]
     public class UsuarioController : Controller
     {
         private ApplicationDbContext _context;
