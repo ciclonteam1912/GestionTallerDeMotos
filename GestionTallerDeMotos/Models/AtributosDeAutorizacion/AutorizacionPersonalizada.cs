@@ -8,7 +8,7 @@ namespace GestionTallerDeMotos.Models.AtributosDeAutorizacion
     {
         private const string IS_AUTHORIZED = "isAuthorized";
 
-        public string RedirectUrl = "~/home/index";
+        public string RedirectUrl = "~/error/accesodenegado";
 
         public AutorizacionPersonalizada(params string[] roles) : base()
         {
