@@ -27,6 +27,5 @@ namespace GestionTallerDeMotos.Controllers
 
             return View("ListaDeUsuarios", usuarios);
         }
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GestionTallerDeMotos.Models;
 using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
+using GestionTallerDeMotos.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -31,61 +32,57 @@ namespace GestionTallerDeMotos.Controllers
             return View("ListaDeRoles", roles);
         }
 
-        /// <summary>
-        /// Create  a New role
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Create()
-        {
-            var rol = new IdentityRole();
 
-            return View(rol);
+        public ActionResult CrearRol()
+        {
+            //var rol = new IdentityRole();
+
+            return View();
         }
 
-        /// <summary>
-        /// Create a New Role
-        /// </summary>
-        /// <param name="Role"></param>
-        /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(IdentityRole Role)
+        [ValidateAntiForgeryToken]
+        public ActionResult CrearRol(RolViewModel rol)
         {
-            _context.Roles.Add(Role);
+            if (!ModelState.IsValid)
+                return View(rol);
+
+            var role = new IdentityRole { Name = rol.Name };
+
+            _context.Roles.Add(role);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        //
-        // GET: /Roles/Edit/5
-        public ActionResult Edit(string roleName)
+        public ActionResult EditarRol(string id)
         {
             var thisRole = _context.Roles
-                .Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase))
+                .Where(r => r.Id.Equals(id, StringComparison.CurrentCultureIgnoreCase))
                 .FirstOrDefault();
+            var viewModel = new RolViewModel(thisRole);
 
-            return View(thisRole);
+            return View(viewModel);
         }
 
-        //
-        // POST: /Roles/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(IdentityRole role)
+        public ActionResult EditarRol(RolViewModel rol)
         {
-            try
-            {
-                _context.Entry(role).State = System.Data.Entity.EntityState.Modified;
-                _context.SaveChanges();
+            if (!ModelState.IsValid)
+                return View(rol);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var rolBD = _context.Roles.SingleOrDefault(r => r.Name == rol.OriginalRoleName);
+
+            if (rolBD == null)
+                return HttpNotFound();
+
+            rolBD.Name = rol.Name;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
-
+       
         public ActionResult Delete(string RoleName)
         {
             var thisRole = _context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();

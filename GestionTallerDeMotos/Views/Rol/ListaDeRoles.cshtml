@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+﻿@*@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>*@
 @{
     ViewBag.Title = "Lista de Roles";
 }
@@ -7,7 +7,7 @@
 <div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
     <h2>Lista de Roles</h2>
 
-    <p>@Html.ActionLink("Crear Nuevo Rol", "Create") | @Html.ActionLink("Administrar Rol de Usuario", "ManageUserRoles")</p>
+    <p>@Html.ActionLink("Crear Nuevo Rol", "CrearRol") | @Html.ActionLink("Administrar Rol de Usuario", "ManageUserRoles")</p>
     <hr />
 
     <table id="roles" class="table table-bordered table-hover dataTable-responsive">
@@ -15,18 +15,19 @@
             <tr>
                 <th></th>
                 <th></th>
+                <th>Id</th>
                 <th>Nombre</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var rol in Model)
+            @*@foreach (var rol in Model)
             {
                 <tr>
                     <td>@Html.ActionLink("Editar", "Edit", new { roleName = @rol.Name })</td>
                     <td><span onclick="return confirm('¿Estás seguro que deseas eliminar?')"><a href="/Role/Delete?RoleName=@rol.Name" class="delLink" style="color:red;">Eliminar</a></span></td>
                     <td>@rol.Name</td>                    
                 </tr>
-            }
+            }*@
         </tbody>
     </table>
 </div>
@@ -34,8 +35,121 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
+            $("#menuSeguridad").addClass('active');
             $("thead").show();
-            $("#roles").DataTable();
+
+            var table = $("#roles").DataTable({
+                bJQueryUI: true,
+                sPaginationType: "full_numbers",
+                "scrollX": true,
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                ajax: {
+                    url: "/api/roles",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='/Rol/EditarRol/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                        },
+                    },
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-rol-id=" + data + "></a>";
+                        }
+                    },
+                    {
+                        data: "Id"
+                    },
+                    {
+                        data: "Name"
+                    }
+                ]
+            });
+
+            //Evento click al eliminar un rol
+            $("#roles").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar esta aseguradora?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/roles/" + button.attr("data-rol-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Rol eliminado con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se pudo eliminar el rol.");
+                                });
+                        }
+                    }
+                });
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
         })
     </script>
 }

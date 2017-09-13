@@ -166,7 +166,7 @@ namespace GestionTallerDeMotos.Controllers
                     //await roleManager.CreateAsync(new IdentityRole("Administrador"));
                     //await UserManager.AddToRoleAsync(user.Id, "Administrador");
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
@@ -174,7 +174,7 @@ namespace GestionTallerDeMotos.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Usuario");
                 }
                 AddErrors(result);
             }
