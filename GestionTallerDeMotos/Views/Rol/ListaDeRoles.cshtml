@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>*@
-@{
+﻿@{
     ViewBag.Title = "Lista de Roles";
 }
 
@@ -20,14 +19,6 @@
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var rol in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink("Editar", "Edit", new { roleName = @rol.Name })</td>
-                    <td><span onclick="return confirm('¿Estás seguro que deseas eliminar?')"><a href="/Role/Delete?RoleName=@rol.Name" class="delLink" style="color:red;">Eliminar</a></span></td>
-                    <td>@rol.Name</td>                    
-                </tr>
-            }*@
         </tbody>
     </table>
 </div>
@@ -37,7 +28,7 @@
         $(document).ready(function () {
             $("#menuSeguridad").addClass('active');
             $("thead").show();
-
+            $.fn.dataTable.ext.errMode = 'none';
             var table = $("#roles").DataTable({
                 bJQueryUI: true,
                 sPaginationType: "full_numbers",
@@ -71,18 +62,22 @@
                     dataSrc: ""
                 },
                 columns: [
-                    {
+                    {                        
                         sortable: false,
                         data: "Id",
-                        render: function (data) {
-                            return "<a href='/Rol/EditarRol/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                        render: function (data, type, rol) {
+                            if(rol.Name != "Administrador")
+                                var html = "<a href='/Rol/EditarRol/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                            return html; 
                         },
                     },
                     {
                         sortable: false,
                         data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-rol-id=" + data + "></a>";
+                        render: function (data, type, rol) {
+                            if (rol.Name != "Administrador")
+                                var html = "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-rol-id=" + data + "></a>";
+                            return html;
                         }
                     },
                     {
@@ -99,7 +94,7 @@
                 var button = $(this);
 
                 bootbox.confirm({
-                    message: "¿Estás seguro de eliminar esta aseguradora?",
+                    message: "¿Estás seguro de eliminar este rol?",
                     buttons: {
                         "cancel": {
                             label: "Cancelar"

@@ -33,8 +33,9 @@ namespace GestionTallerDeMotos.Controllers
         }
 
 
-        public ActionResult CrearRol()
+        public ActionResult CrearRol(string message = "")
         {
+            ViewBag.Message = message;
             //var rol = new IdentityRole();
 
             return View();
@@ -44,10 +45,15 @@ namespace GestionTallerDeMotos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CrearRol(RolViewModel rol)
         {
+            ViewBag.Message = "Nombre de rol ya existe!";
             if (!ModelState.IsValid)
                 return View(rol);
 
             var role = new IdentityRole { Name = rol.Name };
+            var idManager = new IdentityManager();
+
+            if (idManager.RoleExists(rol.Name))
+                return View(rol);
 
             _context.Roles.Add(role);
             _context.SaveChanges();
@@ -57,6 +63,9 @@ namespace GestionTallerDeMotos.Controllers
 
         public ActionResult EditarRol(string id)
         {
+            if (id == "4cc9d923-926d-428c-8f45-2bb6e4b215f0")
+                return RedirectToAction("Index");
+
             var thisRole = _context.Roles
                 .Where(r => r.Id.Equals(id, StringComparison.CurrentCultureIgnoreCase))
                 .FirstOrDefault();
@@ -83,23 +92,12 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
        
-        public ActionResult Delete(string RoleName)
-        {
-            var thisRole = _context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            _context.Roles.Remove(thisRole);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         public ActionResult ManageUserRoles()
         {
-            var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
             ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
@@ -107,50 +105,27 @@ namespace GestionTallerDeMotos.Controllers
             var account = new AccountController(usrMgr);
             account.UserManager.AddToRole(user.Id, RoleName);
 
-            ViewBag.ResultMessage = "Role created successfully !";
-
-            // prepopulat roles for the view dropdown
-            var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
-
             return View("ManageUserRoles");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetRoles(string UserName)
+        public JsonResult ObtenerRoles(string UserName)
         {
-            if (!string.IsNullOrWhiteSpace(UserName))
-            {
+            if (!string.IsNullOrWhiteSpace(UserName)){
                 ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                var usrMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var account = new AccountController(userManager);
 
-                var account = new AccountController(usrMgr);
+                var listaRoles = account.UserManager.GetRoles(user.Id);
 
-                ViewBag.RolesForThisUser = account.UserManager.GetRoles(user.Id);
-
-                // prepopulat roles for the view dropdown
-                var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-                ViewBag.Roles = list;
+                return Json(listaRoles);
             }
 
-            return View("ManageUserRoles");
+            return Json(UserName);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteRoleForUser(string UserName, string RoleName)
         {
-            if (string.IsNullOrEmpty(RoleName))
-            {
-                ViewBag.ResultMessage = "Debe seleccionar un rol";
-                return View("ManageUserRoles");
-            }
-            if (string.IsNullOrEmpty(UserName))
-            {
-                ViewBag.ResultMessage = "Debe seleccionar un usuario";
-                return View("ManageUserRoles");
-            }
             var usrMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var account = new AccountController(usrMgr);
             ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
@@ -158,15 +133,7 @@ namespace GestionTallerDeMotos.Controllers
             if (account.UserManager.IsInRole(user.Id, RoleName))
             {
                 account.UserManager.RemoveFromRole(user.Id, RoleName);
-                ViewBag.ResultMessage = "Role removed from this user successfully !";
             }
-            else
-            {
-                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
-            }
-            // prepopulat roles for the view dropdown
-            var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
 
             return View("ManageUserRoles");
         }
