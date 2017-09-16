@@ -42,7 +42,7 @@
                 if (title != "")
                     $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
             });
-
+            $.fn.dataTable.ext.errMode = 'none';
             var table = $("#usuarios").DataTable({
                 bJQueryUI: true,
                 sPaginationType: "full_numbers",               
@@ -79,8 +79,10 @@
                     {
                         sortable: false,
                         data: "Id",
-                        render: function (data) {
-                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-usuario-id=" + data + "></a>";
+                        render: function (data, type, usuario) {
+                            if (usuario.UserName != "admin")
+                                var html = "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-usuario-id=" + data + "></a>";
+                            return html;
                         }
                     },
                     {
