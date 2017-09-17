@@ -57,6 +57,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.FechaDeNacimiento, new { id = "labelFecha"})
                         @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control", placeholder = "Fecha de Nacimiento...", id = "inputFecha" })
+                        @Html.ValidationMessageFor(m => m.FechaDeNacimiento)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.NombrePropietario)

@@ -12,27 +12,36 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
 
         public string Apellido { get; set; }
 
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
+        [Display(Name = "Correo Electrónico")]
         public string CorreoElectronico { get; set; }
 
+        [Display(Name = "Nombre del Propietario")]
         public string NombrePropietario { get; set; }
 
+        [Display(Name = "Fecha de Nacimiento")]
         public DateTime? FechaDeNacimiento { get; set; }
 
+        [Display(Name = "Fecha de Ingreso")]
         public DateTime FechaDeIngreso { get; set; }
 
         public Personeria Personeria { get; set; }
 
+        [Display(Name = "Personería")]
         public byte PersoneriaId { get; set; }
 
         public TipoDocumento TipoDocumento { get; set; }
 
+        [Display(Name = "Tipo de Documento")]
         public byte TipoDocumentoId { get; set; }
 
         [Required]
+        [Display(Name = "Valor del Documento")]
         public string ValorDocumento { get; set; }
 
         public string NombreCompleto

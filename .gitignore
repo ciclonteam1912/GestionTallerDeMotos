@@ -266,3 +266,4 @@ __pycache__/
 /GestionTallerDeMotos/Content/images
 /GestionTallerDeMotos/ViewModels/PresupuestoDetalleViewModel.cs
 /GestionTallerDeMotos/Views/Presupuesto/PresupuestoDetalleFormulario.cshtml
+/GestionTallerDeMotos/Content/animated.css

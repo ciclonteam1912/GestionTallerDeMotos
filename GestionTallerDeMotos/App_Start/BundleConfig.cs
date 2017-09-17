@@ -41,6 +41,7 @@ namespace GestionTallerDeMotos
                       "~/Content/DataTables/css/buttons.bootstrap.css",
                       "~/Content/DataTables/css/dataTables.tableTools.css",
                       "~/Content/FontAwesome-4.7.0/css/font-awesome.css",
+                      "~/Content/animated.css",
                       "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
