@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GestionTallerDeMotos.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
 
 namespace GestionTallerDeMotos.Controllers
 {
@@ -142,7 +143,7 @@ namespace GestionTallerDeMotos.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [AutorizacionPersonalizada(RoleName.Administrador)]
         public ActionResult Register()
         {
             return View();
@@ -151,7 +152,7 @@ namespace GestionTallerDeMotos.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [AutorizacionPersonalizada(RoleName.Administrador)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

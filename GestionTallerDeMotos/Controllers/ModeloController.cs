@@ -20,13 +20,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Modelo
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeModelos");
 
             return View("ListaDeModelosSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevoModelo()
         {
             var marcas = _context.Marcas.ToList();
@@ -39,7 +39,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ModeloFormulario", viewModel);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarModelo(Modelo modelo)
@@ -67,7 +67,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarModelo(int id)
         {
             var modeloBD = _context.Modelos.SingleOrDefault(c => c.Id == id);

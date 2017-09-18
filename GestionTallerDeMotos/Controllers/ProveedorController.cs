@@ -19,13 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Proveedor
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeProveedores");
 
             return View("ListaDeProveedoresSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevoProveedor()
         {
             var proveedor = new Proveedor();
@@ -33,7 +33,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ProveedorFormulario", proveedor);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarProveedor(Proveedor proveedor)
@@ -54,7 +54,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarProveedor(int id)
         {
             var proveedorBD = _context.Proveedores.SingleOrDefault(p => p.Id == id);

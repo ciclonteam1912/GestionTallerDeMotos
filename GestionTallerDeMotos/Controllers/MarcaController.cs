@@ -19,20 +19,20 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Marca
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeMarcas");
 
             return View("ListaDeMarcasSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevaMarca()
         {
             var marca = new Marca();
             return View("MarcaFormulario", marca);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarMarca(Marca marca)
@@ -53,7 +53,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarMarca(int id)
         {
             var marcaBD = _context.Marcas.SingleOrDefault(c => c.Id == id);

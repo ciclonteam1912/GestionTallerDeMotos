@@ -664,6 +664,7 @@
     <Content Include="Content\DataTables\images\copy document.psd" />
     <Content Include="Content\DataTables\images\file_types.psd" />
     <Content Include="Content\DataTables\images\printer.psd" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

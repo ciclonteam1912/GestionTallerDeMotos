@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using GestionTallerDeMotos.Models;
+using GestionTallerDeMotos.Models.AtributosDeAutorizacion;
+using System.Web.Mvc;
 
 namespace GestionTallerDeMotos.Controllers
 {
@@ -43,6 +45,7 @@ namespace GestionTallerDeMotos.Controllers
             return View();
         }
 
+        [AutorizacionPersonalizada(RoleName.Administrador)]
         public ActionResult Seguridad()
         {
             return View();

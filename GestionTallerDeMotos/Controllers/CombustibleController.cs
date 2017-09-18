@@ -19,20 +19,20 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Combustible
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeCombustibles");
 
             return View("ListaDeCombustiblesSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevoCombustible()
         {
             var combustible = new Combustible();
             return View("CombustibleFormulario", combustible);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarCombustible(Combustible combustible)
@@ -53,7 +53,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarCombustible(int id)
         {
             var combustibleBD = _context.Combustibles.SingleOrDefault(c => c.Id == id);

@@ -19,13 +19,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Aseguradora
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeAseguradoras");
 
             return View("ListaDeAseguradorasSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevaAseguradora()
         {
             var aseguradora = new Aseguradora();
@@ -33,7 +33,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("AseguradoraFormulario", aseguradora);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarAseguradora(Aseguradora aseguradora)
@@ -54,7 +54,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarAseguradora(int id)
         {
             var aseguradoraBD = _context.Aseguradoras.SingleOrDefault(c => c.Id == id);

@@ -24,13 +24,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: FormaPago
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if (User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeFormasDePago");
 
             return View("ListaDeFormasDePagoSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevoFormaPago()
         {
             var formaPago = new FormaPago();
@@ -38,7 +38,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("NuevoFormaPagoFormulario", formaPago);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarFormaPago(FormaPago formaPago)
@@ -63,7 +63,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarFormaPago(int id)
         {
             var formaPagoBD = _context.FormaPagos.SingleOrDefault(c => c.Id == id);

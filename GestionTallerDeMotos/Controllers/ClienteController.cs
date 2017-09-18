@@ -20,13 +20,13 @@ namespace GestionTallerDeMotos.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller))
+            if(User.IsInRole(RoleName.Administrador) || User.IsInRole(RoleName.JefeDeTaller) || User.IsInRole(RoleName.Mecanico))
                 return View("ListaDeClientes");
 
             return View("ListaDeClientesSoloLectura");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult NuevoCliente()
         {
             var tiposDocumentos = _context.TiposDocumento.ToList();
@@ -41,7 +41,7 @@ namespace GestionTallerDeMotos.Controllers
             return View("ClienteFormulario", viewModel);
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardarCliente(Cliente cliente)
@@ -72,7 +72,7 @@ namespace GestionTallerDeMotos.Controllers
             return RedirectToAction("Index");
         }
 
-        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller)]
+        [AutorizacionPersonalizada(RoleName.Administrador, RoleName.JefeDeTaller, RoleName.Mecanico)]
         public ActionResult EditarCliente(int id)
         {
             var cliente = _context.Clientes.SingleOrDefault(c => c.Id == id);
