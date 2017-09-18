@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "ListaDeTalonarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_MenuVertical")
+
+<div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
+    <h2>Lista De Talonarios</h2>
+
+    <table class="table table-bordered table-hover dataTable-responsive" id="talonarios"> 
+        <thead>
+            <tr>
+                <th>Timbrado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Fin</th>
+                <th>N° Factura Inicial</th>
+                <th>N° Factura Final</th>
+                <th>N° Factura Actuial</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th>Timbrado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Fin</th>
+                <th>N° Factura Inicial</th>
+                <th>N° Factura Final</th>
+                <th>N° Factura Actuial</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#menuVentas").addClass('active');
+            $("thead").show();
+            $("tfoot").show();
+
+            $("#talonarios tfoot th").each(function () {
+                var title = $(this).text();
+                if (title != "")
+                    $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
+            });
+
+            var table = $("#talonarios").DataTable({
+                "scrollX": true,
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                ajax: {
+                    url: "/api/talonarios",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "Timbrado"
+                    },
+                    {
+                        data: "FechaInicioVigencia"
+                    },
+                    {
+                        data: "FechaFinVigencia"
+                    },
+                    {
+                        data: "NumeroFacturaInicial"
+                    },
+                    {
+                        data: "NumeroFacturaFinal"
+                    },
+                    {
+                        data: "NumeroFacturaActual"
+                    }
+                ]
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+        });
+    </script>    
+}

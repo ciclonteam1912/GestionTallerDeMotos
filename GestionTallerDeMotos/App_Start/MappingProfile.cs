@@ -22,6 +22,7 @@ namespace GestionTallerDeMotos.App_Start
                 .ForMember(e => e.FechaDeIngreso, opt => opt.Ignore());
             Mapper.CreateMap<FormaPago, FormaPago>();
             Mapper.CreateMap<ServicioBasico, ServicioBasico>();
+            Mapper.CreateMap<Talonario, Talonario>();
 
             //Dominio a DTO
             Mapper.CreateMap<Cliente, ClienteDto>();

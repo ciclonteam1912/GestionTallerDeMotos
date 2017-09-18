@@ -23,7 +23,8 @@ namespace GestionTallerDeMotos
                         "~/Scripts/vfs_fonts.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/DataTables/dataTables.bootstrap.js",
-                        "~/Scripts/DataTables/buttons.bootstrap.js"));
+                        "~/Scripts/DataTables/buttons.bootstrap.js",
+                        "~/Scripts/moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

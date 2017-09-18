@@ -218,6 +218,7 @@
     <Compile Include="ConfiguracionDeEntidades\ProductoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ProveedorConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\ServicioBasicoConfiguracion.cs" />
+    <Compile Include="ConfiguracionDeEntidades\TalonarioConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\TipoDocumentoConfiguracion.cs" />
     <Compile Include="ConfiguracionDeEntidades\VehiculoConfiguracion.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Controllers\APIs\PresupuestosController.cs" />
     <Compile Include="Controllers\APIs\RolesController.cs" />
     <Compile Include="Controllers\APIs\ServiciosBasicosController.cs" />
+    <Compile Include="Controllers\APIs\TalonariosController.cs" />
     <Compile Include="Controllers\APIs\UsuariosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioBasicoController.cs" />
+    <Compile Include="Controllers\TalonarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Dtos\AseguradoraDto.cs" />
@@ -380,6 +383,10 @@
     <Compile Include="Migrations\201709101616406_CargarUsuarioYRolPorDefecto.Designer.cs">
       <DependentUpon>201709101616406_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709171951277_CreacionDeTablaTalonarios.cs" />
+    <Compile Include="Migrations\201709171951277_CreacionDeTablaTalonarios.Designer.cs">
+      <DependentUpon>201709171951277_CreacionDeTablaTalonarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AtributosDeAutorizacion\AutorizacionPersonalizada.cs" />
@@ -403,6 +410,7 @@
     <Compile Include="Models\ModelosDeDominio\Producto.cs" />
     <Compile Include="Models\ModelosDeDominio\Proveedor.cs" />
     <Compile Include="Models\ModelosDeDominio\ServicioBasico.cs" />
+    <Compile Include="Models\ModelosDeDominio\Talonario.cs" />
     <Compile Include="Models\ModelosDeDominio\TipoDocumento.cs" />
     <Compile Include="Models\ModelosDeDominio\Vehiculo.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -414,6 +422,7 @@
     <Compile Include="ViewModels\PresupuestoDetalleViewModel.cs" />
     <Compile Include="ViewModels\ProductoViewModel.cs" />
     <Compile Include="ViewModels\RolViewModel.cs" />
+    <Compile Include="ViewModels\TalonarioViewModel.cs" />
     <Compile Include="ViewModels\VehiculoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -707,6 +716,7 @@
     <Content Include="Scripts\DataTables\dataTables.material.js" />
     <Content Include="Scripts\DataTables\dataTables.material.min.js" />
     <Content Include="Scripts\menu-responsive.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\pdfmake.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
@@ -828,6 +838,9 @@
     <Content Include="Views\Rol\ManageUserRoles.cshtml" />
     <Content Include="Views\Error\AccesoDenegado.cshtml" />
     <Content Include="Views\Home\Seguridad.cshtml" />
+    <Content Include="Views\Talonario\ListaDeTalonarios.cshtml" />
+    <Content Include="Views\Talonario\ListaDeTalonariosSoloLectura.cshtml" />
+    <Content Include="Views\Talonario\TalonarioFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -928,6 +941,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709101616406_CargarUsuarioYRolPorDefecto.resx">
       <DependentUpon>201709101616406_CargarUsuarioYRolPorDefecto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709171951277_CreacionDeTablaTalonarios.resx">
+      <DependentUpon>201709171951277_CreacionDeTablaTalonarios.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -39,7 +39,7 @@ namespace GestionTallerDeMotos.Models
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<FormaPago> FormaPagos { get; set; }
         public DbSet<ServicioBasico> ServiciosBasicos { get; set; }
-
+        public DbSet<Talonario> Talonarios { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -66,6 +66,7 @@ namespace GestionTallerDeMotos.Models
             modelBuilder.Configurations.Add(new CargoConfiguracion());
             modelBuilder.Configurations.Add(new FormaPagoConfiguracion());
             modelBuilder.Configurations.Add(new ServicioBasicoConfiguracion());
+            modelBuilder.Configurations.Add(new TalonarioConfiguracion());
         }
 
         public static ApplicationDbContext Create()

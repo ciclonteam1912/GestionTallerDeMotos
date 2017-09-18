@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "ListaDeTalonarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_MenuVertical")
+
+<div class="col-lg-9 col-md-9 col-xs-11" id="contenido">
+    <h2>Lista De Talonarios</h2>
+
+    <p><a href="~/Talonario/NuevoTalonario" class="btn btn-primary">Agregar Nuevo Talonario</a></p>
+    <table class="table table-bordered table-hover dataTable-responsive" id="talonarios"> 
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Timbrado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Fin</th>
+                <th>N° Factura Inicial</th>
+                <th>N° Factura Final</th>
+                <th>N° Factura Actuial</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Timbrado</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Fin</th>
+                <th>N° Factura Inicial</th>
+                <th>N° Factura Final</th>
+                <th>N° Factura Actuial</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#menuVentas").addClass('active');
+            $("thead").show();
+            $("tfoot").show();
+
+            $("#talonarios tfoot th").each(function () {
+                var title = $(this).text();
+                if (title != "")
+                    $(this).html('<input type="text" placeholder="Buscar ' + title + '" class="form-control"/>');
+            });
+
+            var table = $("#talonarios").DataTable({
+                "scrollX": true,
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                ajax: {
+                    url: "/api/talonarios",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='/Talonario/EditarTalonario/" + data + "' class='btn-link glyphicon glyphicon-edit' title='Editar'></a>";
+                        }
+                    },
+                    {
+                        sortable: false,
+                        data: "Id",
+                        render: function (data) {
+                            return "<a href='#' class='btn-link glyphicon glyphicon-remove js-eliminar' title='Eliminar' data-talonario-id=" + data + "></a>";
+                        }
+                    },
+                    {
+                        data: "Timbrado"
+                    },
+                    {
+                        data: "FechaInicioVigencia",
+                        render: function (d) {
+                            return moment(d).format("DD MMM YYYY HH:mm");
+                        }
+                    },
+                    {
+                        data: "FechaFinVigencia",
+                        render: function (d) {
+                            return moment(d).format("DD MMM YYYY HH:mm");
+                        }
+                    },
+                    {
+                        data: "NumeroFacturaInicial"
+                    },
+                    {
+                        data: "NumeroFacturaFinal"
+                    },
+                    {
+                        data: "NumeroFacturaActual"
+                    }
+                ]
+            });
+
+            //Evento click al eliminar un talonario
+            $("#talonarios").on("click", ".js-eliminar", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    message: "¿Estás seguro de eliminar este talonario?",
+                    buttons: {
+                        "cancel": {
+                            label: "Cancelar"
+                        },
+                        "confirm": {
+                            label: "Eliminar"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/talonarios/" + button.attr("data-talonario-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                    toastr.success("Talonario eliminado con éxito.");
+                                })
+                                .fail(function () {
+                                    toastr.error("No se puedo eliminar el talonario.");
+                                });
+                        }
+                    }
+                });
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
+        });
+    </script>    
+}
