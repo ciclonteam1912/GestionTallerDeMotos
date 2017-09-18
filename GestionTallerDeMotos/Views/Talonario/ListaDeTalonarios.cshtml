@@ -19,7 +19,7 @@
                 <th>Fecha Fin</th>
                 <th>N° Factura Inicial</th>
                 <th>N° Factura Final</th>
-                <th>N° Factura Actuial</th>
+                <th>N° Factura Actual</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -32,7 +32,7 @@
                 <th>Fecha Fin</th>
                 <th>N° Factura Inicial</th>
                 <th>N° Factura Final</th>
-                <th>N° Factura Actuial</th>
+                <th>N° Factura Actual</th>
             </tr>
         </tfoot>
     </table>
@@ -52,6 +52,8 @@
             });
 
             var table = $("#talonarios").DataTable({
+                bJQueryUI: true,
+                sPaginationType: "full_numbers",
                 "scrollX": true,
                 language: {
                     "sProcessing": "Procesando...",

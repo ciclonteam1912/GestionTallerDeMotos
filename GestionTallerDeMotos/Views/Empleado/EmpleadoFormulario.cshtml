@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.FechaDeNacimiento, new { id = "labelFecha" })
-                        @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control", placeholder = "Fecha de Nacimiento...", id = "inputFecha" })
+                        @Html.TextBoxFor(m => m.FechaDeNacimiento, "{0:d MMM yyyy}", new { @class = "form-control", placeholder = "Fecha de Nacimiento...", id = "inputFecha" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.HoraDeEntrada)
