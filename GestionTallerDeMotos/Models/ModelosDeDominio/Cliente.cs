@@ -8,19 +8,26 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
         public int Id { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string Nombre { get; set; }
 
+        [StringLength(50)]
         public string Apellido { get; set; }
 
+        [StringLength(50)]
         [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
+        [StringLength(255)]
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
+        [StringLength(50)]
+        [EmailAddress]
         [Display(Name = "Correo Electrónico")]
         public string CorreoElectronico { get; set; }
 
+        [StringLength(50)]
         [Display(Name = "Nombre del Propietario")]
         public string NombrePropietario { get; set; }
 
@@ -41,6 +48,7 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
         public byte TipoDocumentoId { get; set; }
 
         [Required]
+        [StringLength(50)]
         [Display(Name = "Valor del Documento")]
         public string ValorDocumento { get; set; }
 
@@ -48,7 +56,7 @@ namespace GestionTallerDeMotos.Models.ModelosDeDominio
         {
             get
             {
-                return Nombre.ToUpper() + " " + Apellido.ToUpper();
+                return Nombre.ToUpper() + " " + Apellido?.ToUpper();
             }
         }
     }
